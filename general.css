@@ -1,0 +1,523 @@
+/* cerinta 1 , 6: definirea variabilelor css */
+:root {
+    --culoare-fundal-pagina: #e6e6e6; 
+    --culoare-fundal-zone: #ffffff;   
+    --culoare-text: #1a1a1a;          
+    --culoare-principala: #d20a0a;    
+    --culoare-secundara: #000000;     
+    --culoare-highlight: #ff0000;     
+    --culoare-border: #cccccc;       
+
+    /* cerinta 6: variabile de spatiere initiale  */
+    --spatiere-laterala: 10vw;  /* a */
+    --spatiere-grid: 30px;      /* b*/
+    --padding-text: 30px;       /* d */
+    
+    /*  cerinta 6: variabile media  */
+    --media-max-width: 1000px;  /* e */
+    --media-min-width: 250px;   /* e */
+}
+
+/*cerinta 2 , 6*/
+html {
+    /* dimensiunea de baza pentru ecran mic */
+    font-size: 14px; 
+    /* tranzitie redimensionare text */
+    transition: font-size 0.4s ease-in-out; 
+}
+
+body {
+    font-size: 1rem; 
+    line-height: 1.6;
+    margin: 0;
+    /* fara scroll orizontal */
+    overflow-x: hidden; 
+    
+    /* cerinta 6: aplicam fundalul paginii */
+    background-color: var(--culoare-fundal-pagina);
+    color: var(--culoare-text);
+    
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.3rem; }
+p { font-size: 1rem; margin-bottom: 1rem; }
+
+/* cerinta 6: c , d*/
+main > * {
+    background-color: var(--culoare-fundal-zone); 
+    border-radius: 12px;                          
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);       
+    border: 1px solid var(--culoare-border);
+    padding: var(--padding-text);                 
+    box-sizing: border-box;
+}
+
+/* cerinta 2 , 6: layout responsive */
+main {
+    display: grid;
+    /* cerinta 6: b*/
+    gap: var(--spatiere-grid);
+    
+    padding-left: var(--spatiere-laterala);
+    padding-right: var(--spatiere-laterala);
+    padding-top: var(--spatiere-grid);
+    padding-bottom: var(--spatiere-grid);
+    
+    max-width: 1400px;
+    margin: 0 auto;
+    
+    /* pe ecran mic o singura coloana*/
+    grid-template-areas: 
+        "z1"
+        "z2"
+        "z3"
+        "z4"
+        "z5"
+        "z6"
+        "z7"
+        "z8";
+}
+
+/* alocarea claselor pt grid */
+.zona-1 { grid-area: z1; }
+.zona-2 { grid-area: z2; }
+.zona-3 { grid-area: z3; }
+.zona-4 { grid-area: z4; }
+.zona-5 { grid-area: z5; }
+.zona-6 { grid-area: z6; }
+.zona-7 { grid-area: z7; }
+.zona-8 { grid-area: z8; }
+
+/* media queries cerinta 6 */
+
+/*  ecran mic */
+@media (max-width: 767px) {
+    /* cerinta 3: dezactivare animatii pe ecran mic */
+    * {
+        animation: none !important;
+    }
+    
+    /* cerinta 6: scadem spatierile la minim pentru telefoane */
+    :root {
+        --spatiere-laterala: 15px; 
+        --spatiere-grid: 15px;
+        --padding-text: 15px;
+        --media-min-width: 150px;
+    }
+}
+
+/* ecran mediu */
+@media (min-width: 768px) and (max-width: 1024px) {
+    :root {
+        /* cerinta 6: spatieri intermediare pentru tablete */
+        --spatiere-laterala: 5vw; 
+        --spatiere-grid: 20px;
+        --padding-text: 20px;
+        --media-max-width: 100%;
+        --media-min-width: 200px;
+    }
+    html {
+        font-size: 15px; /* creste cu 1px (cerinta 2) */
+    }
+    main {
+        grid-template-columns: 1fr 1fr; /* doua coloane */
+        grid-template-areas: 
+            "z1 z1"
+            "z2 z8"
+            "z3 z8"
+            "z6 z5"
+            "z4 z7";
+    }
+}
+
+/* ecran mare  */
+@media (min-width: 1025px) {
+    html {
+        font-size: 16px; 
+    }
+    main {
+        /* setam 3 coloane */
+        grid-template-columns: 1fr 1fr 1.5fr; 
+        
+        /* harta cerinta 2*/
+        grid-template-areas: 
+            "z1 z1 z1"
+            "z2 z2 z8"
+            "z3 z6 z8"
+            "z5 z6 z8"
+            "z5 z4 z7";
+    }
+}
+
+/* header si footer  */
+header, footer {
+    background-color: var(--culoare-secundara); 
+    color: var(--culoare-fundal-zone); 
+}
+
+header a, footer a {
+    color: var(--culoare-fundal-zone);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header a:hover, footer a:hover {
+    color: var(--culoare-highlight);
+}
+
+header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: var(--padding-text) var(--spatiere-laterala); 
+    border-bottom: 4px solid var(--culoare-principala);
+}
+
+.header-stanga {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+}
+
+
+.header-stanga img {
+    height: 50px;
+    width: auto !important;
+    min-width: unset !important;
+    max-width: unset !important;
+    display: inline-block;
+    margin: 0;
+}
+
+.header-stanga h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.meniu-principal ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 25px; 
+}
+
+.meniu-principal a {
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.submeniu {
+    display: none !important; 
+}
+
+footer {
+    border-top: 4px solid var(--culoare-principala);
+}
+
+.footer-coloane {
+    display: grid;
+    /* pe desktop 3 coloane */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: var(--spatiere-grid); /* cerinta 6 b */
+    padding: var(--padding-text) var(--spatiere-laterala); 
+}
+
+.footer-coloane h3 {
+    border-bottom: 2px solid var(--culoare-principala);
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+.footer-contact p, .footer-linkuri ul {
+    font-style: normal;
+    line-height: 1.8;
+}
+
+.footer-linkuri ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-contact a, .footer-linkuri a {
+    transition: color 0.3s ease;
+}
+
+.footer-copyright {
+    text-align: center;
+    padding: 15px;
+    background-color: #0a0a0a; 
+    font-size: 0.9rem;
+}
+
+/* responsive header si footer pentru telefon */
+@media (max-width: 767px) {
+    header {
+        flex-direction: column; /* sigla sus si meniul jos pe telefon */
+        gap: 20px;
+    }
+    
+    .meniu-principal ul {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .footer-coloane {
+        grid-template-columns: 1fr; /* o singura coloana pe telefon */
+    }
+}
+
+
+/* cerinta 6.e: elemente media responsive*/
+
+img, iframe, video, object {
+    width: 100%; 
+    max-width: var(--media-max-width); 
+    min-width: var(--media-min-width); 
+    height: auto;
+    display: block; 
+    margin: 0 auto; 
+}
+
+iframe, object {
+    height: 400px; 
+}
+
+@media (max-width: 767px) {
+    iframe, object { height: 250px; }
+}
+
+
+/* cerinta 3: taburi tip dosar  */
+.container-taburi-video {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+}
+
+.butoane-taburi {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; 
+    gap: 8px; 
+    padding-left: 20px; 
+    
+   
+    margin-bottom: -4px; 
+    position: relative;
+    z-index: 2; /* fortam butoanele sa stea deasupra videoclipului */
+}
+
+.tab-link {
+    background-color: #e8e8e8; 
+    color: var(--culoare-text);
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+    
+ 
+    border: 4px solid var(--culoare-secundara);
+    border-radius: 12px 12px 0 0; 
+    
+    transition: all 0.3s ease; /* tranzitie pentru ridicare si culoare */
+}
+
+/* hover */
+.tab-link:hover, .tab-link:focus {
+    background-color: var(--culoare-principala); 
+    color: var(--culoare-fundal-zone);
+    
+    padding-top: 15px; 
+    margin-top: -5px; 
+}
+
+.iframe-stilizat {
+    border: 4px solid var(--culoare-secundara);
+    border-radius: 8px;
+    background-color: var(--culoare-secundara); 
+    position: relative;
+    z-index: 1; /* sub butoane */
+}
+
+/* responsivitate pentru taburi pe telefon */
+@media (max-width: 767px) {
+    .butoane-taburi {
+        flex-wrap: wrap;
+        padding-left: 10px;
+    }
+    .tab-link {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+}
+
+
+/* cerinta 4: stilizare tabel */
+
+/* 1 */
+.container-tabel {
+    width: 100%;
+    overflow-x: auto; 
+    margin-top: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* lipeste celulele intre ele */
+    background-color: var(--culoare-fundal-zone);
+    text-align: center;
+}
+
+/* 2*/
+caption {
+    caption-side: bottom; 
+    padding: 15px;
+    color: var(--culoare-text);
+    font-size: 0.9rem;
+}
+
+th, td {
+    padding: 12px;
+}
+tbody td {
+    border-bottom: 1px solid var(--culoare-border); 
+}
+
+/* 3 */
+thead th {
+    border-bottom: 3px solid var(--culoare-secundara);
+}
+tfoot th, tfoot td {
+    border-top: 3px solid var(--culoare-secundara);
+    background-color: #f9f9f9; 
+}
+
+/* 4 */
+col:nth-child(odd) {
+    border-right: 2px solid var(--culoare-secundara);
+}
+col:nth-child(even) {
+    border-right: 2px solid var(--culoare-principala);
+}
+
+col:last-child {
+    border-right: none;
+}
+
+/* 5 */
+tbody tr {
+    transition: box-shadow 0.5s ease; 
+}
+
+tbody tr:hover {
+    box-shadow: inset 0 0 15px rgba(210, 10, 10, 0.4); 
+}
+
+
+/* cerinta 5: link inapoi sus*/
+
+.buton-top {
+    /* d pozitie fixa  */
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    
+    /* f semi-transparent */
+    opacity: 0.6;
+    
+    /* c  */
+    display: block;
+    width: 40px; 
+    height: 40px; 
+    background-color: var(--culoare-secundara); 
+    border: 1.5px solid var(--culoare-border); 
+    border-radius: 50%; 
+    
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+    
+    text-align: center;
+    line-height: 40px;
+    text-decoration: none; 
+    
+    transition: all 0.5s ease;
+    
+    z-index: 1000;
+}
+
+/* sageata inauntru */
+.sageata-top {
+    font-size: 25px; 
+    color: var(--culoare-fundal-zone);
+    display: inline-block; 
+    transition: all 0.5s ease;
+}
+
+.buton-top:hover {
+    /* f */
+    opacity: 1; 
+    
+    /* c */
+    background-color: var(--culoare-principala); 
+}
+
+.buton-top:hover .sageata-top {
+    /* c */
+    transform: scale(1.3);
+    color: white; 
+    text-shadow: 0px 0px 5px rgba(255,255,255,0.8);
+}
+
+/* bonus 2 mathml */
+
+math {
+    font-family: 'Cambria Math', 'Times New Roman', serif; 
+}
+
+math[display="block"] {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background-color: var(--culoare-fundal-zone);
+    border: 1px solid var(--culoare-border);
+    border-left: 5px solid var(--culoare-principala);
+    border-radius: 8px;
+    padding: 25px 0; 
+    margin: 25px auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* variabilele generale (m, v, t) */
+math mi {
+    font-style: italic;
+    color: var(--culoare-text);
+    font-size: 1.2rem;
+}
+
+/*  forta  */
+math msub > mi:first-child {
+    color: var(--culoare-principala);
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+
+/* indicii (med, i, f) */
+math msub > mi:last-child {
+    font-size: 0.85rem;
+    color: #777777;
+    font-style: normal;
+}
+
+math mo {
+    color: var(--culoare-text);
+    font-size: 1.2rem;
+    padding: 0; 
+}
+
+math mo:contains("="), math mo:contains("-") {
+    margin: 0 8px;
+}
