@@ -1,0 +1,9 @@
+node_modules/
+
+temp/
+logs/
+backup/
+fisiere_uploadate/
+
+npm-debug.log*
+.DS_Store

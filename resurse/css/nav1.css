@@ -1,0 +1,222 @@
+/* Variabile CSS dependente de tema */
+body {
+  --nav-bg: #000000;
+  --nav-text: #ffffff;
+  --nav-hover-bg: #333333;
+  --subnav-bg: #ffffff;
+  --subnav-text: #000000;
+  --subnav-hover-bg: #cccccc;
+  --subnav-hover-text: #d20a0a;
+}
+
+.meniu-principal .meniu-lista .meniu-item .submeniu, .meniu-principal .meniu-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.meniu-principal {
+  background-color: var(--nav-bg);
+  position: relative;
+  z-index: 1000;
+}
+.meniu-principal .hamburger-checkbox, .meniu-principal .hamburger-label {
+  display: none;
+}
+.meniu-principal .meniu-lista {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.meniu-principal .meniu-lista .meniu-item {
+  position: relative;
+}
+.meniu-principal .meniu-lista .meniu-item > a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 25px;
+  color: var(--nav-text);
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+  text-transform: uppercase;
+}
+.meniu-principal .meniu-lista .meniu-item > a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 5px;
+  width: 100%;
+  background: linear-gradient(to right, var(--nav-bg) 50%, white 50%);
+  background-size: 200% 100%;
+  background-position: left bottom;
+  transition: background-position 0.4s ease;
+}
+.meniu-principal .meniu-lista .meniu-item > a:hover::after {
+  background-position: right bottom;
+}
+.meniu-principal .meniu-lista .meniu-item .submeniu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background-color: var(--subnav-bg);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 0.3s ease-in-out;
+}
+.meniu-principal .meniu-lista .meniu-item .submeniu li a {
+  display: block;
+  padding: 15px;
+  color: var(--subnav-text);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #eee;
+  font-weight: bold;
+}
+.meniu-principal .meniu-lista .meniu-item .submeniu li a:hover {
+  background-color: var(--subnav-hover-bg);
+  color: var(--subnav-hover-text);
+}
+.meniu-principal .meniu-lista .meniu-item:hover .submeniu {
+  transform: scaleY(1);
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .meniu-principal .meniu-lista .meniu-item > a {
+    padding: 20px 15px;
+  }
+  .meniu-principal .meniu-lista .meniu-item > a .text-meniu {
+    display: none;
+  }
+  .meniu-principal .meniu-lista .meniu-item > a i {
+    font-size: 1.5rem;
+  }
+}
+/* --- ECRAN MIC (Telefoane) --- */
+@media (max-width: 767px) {
+  .meniu-principal {
+    width: auto;
+    position: static;
+  }
+  .meniu-principal .hamburger-label {
+    display: block;
+    color: var(--nav-text);
+    padding: 0;
+    margin: 0;
+    font-size: 2.5rem;
+    cursor: pointer;
+    text-align: left;
+  }
+  .meniu-principal .meniu-lista {
+    flex-direction: column;
+    justify-content: flex-start;
+    position: absolute;
+    top: 100%;
+    left: calc(-1 * var(--spatiere-laterala));
+    width: calc(100% + 2 * var(--spatiere-laterala));
+    height: auto;
+    max-height: 0;
+    overflow: hidden;
+    /* SCHIMBARE AICI: Fundal negru in loc de gri */
+    background-color: var(--nav-bg);
+    z-index: 1000;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: rotate(-90deg);
+    transform-origin: top left;
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out, visibility 0s linear 0.8s, max-height 0s linear 0.8s;
+  }
+  .meniu-principal .meniu-lista .meniu-item {
+    width: 100%;
+  }
+  .meniu-principal .meniu-lista .meniu-item > a {
+    justify-content: center;
+    border-bottom: 1px solid #333; /* Am mai inchis putin bordura sa arate clean */
+    padding: 25px 20px;
+    font-size: 1.3rem;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .meniu-principal .meniu-lista .meniu-item > a::after {
+    display: none;
+  }
+
+  .meniu-principal .meniu-lista .meniu-item > a:hover {
+    background-color: var(--subnav-hover-bg);
+    color: var(--subnav-text);
+  }
+  .meniu-principal .meniu-lista .meniu-item.acasa-item {
+    background-color: #1a1a1a; /* Un negru o idee mai deschis pentru Home */
+  }
+  .meniu-principal .meniu-lista .meniu-item.acasa-item > a {
+    font-size: 1.6rem;
+  }
+  .meniu-principal .meniu-lista .meniu-item.acasa-item > a .text-meniu {
+    display: none;
+  }
+  .meniu-principal .meniu-lista .meniu-item.acasa-item > a:hover {
+    background-color: var(--subnav-hover-bg);
+    color: var(--subnav-text);
+  }
+  .meniu-principal .meniu-lista .meniu-item .submeniu {
+    position: static;
+    width: 100%;
+    display: none;
+    transform: none;
+    background-color: var(--nav-bg);
+  }
+  .meniu-principal .meniu-lista .meniu-item .submeniu li a {
+    color: var(--nav-text);
+    text-align: center;
+    padding: 15px;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #222;
+    opacity: 0;
+    transform: rotateX(90deg);
+    transform-origin: top;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .meniu-principal .meniu-lista .meniu-item .submeniu li a:hover {
+    background-color: var(--subnav-hover-bg);
+    color: var(--subnav-text);
+  }
+  .meniu-principal .meniu-lista .meniu-item:hover .submeniu {
+    display: flex;
+    flex-direction: column;
+  }
+  .meniu-principal .meniu-lista .meniu-item:hover .submeniu li a {
+    opacity: 1;
+    transform: rotateX(0deg);
+  }
+  .meniu-principal .meniu-lista .meniu-item:hover .submeniu li:nth-child(1) a {
+    transition-delay: 0.1s;
+  }
+  .meniu-principal .meniu-lista .meniu-item:hover .submeniu li:nth-child(2) a {
+    transition-delay: 0.2s;
+  }
+  .meniu-principal .meniu-lista .meniu-item:hover .submeniu li:nth-child(3) a {
+    transition-delay: 0.3s;
+  }
+  .meniu-principal .meniu-lista .meniu-item:hover .submeniu li:nth-child(4) a {
+    transition-delay: 0.4s;
+  }
+  .meniu-principal .meniu-lista .meniu-item:hover .submeniu li:nth-child(5) a {
+    transition-delay: 0.5s;
+  }
+  .meniu-principal .hamburger-checkbox:checked ~ .meniu-lista {
+    visibility: visible;
+    opacity: 1;
+    max-height: 2000px;
+    pointer-events: auto;
+    transform: rotate(0deg);
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out, visibility 0s, max-height 0s;
+  }
+}/*# sourceMappingURL=nav1.css.map */

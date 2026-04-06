@@ -1,0 +1,82 @@
+/* variabile pentru valorile de reset care se repeta */
+:root {
+    --reset-font-baza: 16px;
+    --reset-font-bold: 700;
+    --reset-spatiere-paragraf: 1.5rem;
+    --reset-spatiere-lista: 2rem;
+}
+
+/* resetarea marginilor si paddingurilor  */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* cerinta: html si body primesc dimensiuni in unitati fixe */
+html {
+    font-size: var(--reset-font-baza); /* 16px */ 
+}
+
+body {
+    font-size: var(--reset-font-baza); /* 16px */
+    line-height: 1.5;
+}
+
+
+p {
+    font-size: 1rem;
+    margin-bottom: var(--reset-spatiere-paragraf);
+}
+
+/* redefinire stiluri bold si italic */
+strong, b {
+    font-weight: var(--reset-font-bold);
+    letter-spacing: 0.05em; /* le facem sa iasa subtil in evidenta */
+}
+
+em, i {
+    font-style: italic;
+    color: inherit;
+}
+
+/* redefinire liste */
+ul {
+    list-style-type: none; /* ascundem punctele clasice */
+    padding-left: var(--reset-spatiere-lista);
+}
+
+ul li {
+    font-size: 1rem;
+    position: relative;
+}
+
+ol {
+    padding-left: var(--reset-spatiere-lista);
+}
+
+ol li {
+    font-size: 1rem;
+}
+
+/* resetarea tabelului*/
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 1rem;
+}

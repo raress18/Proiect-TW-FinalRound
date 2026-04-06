@@ -1,0 +1,31 @@
+{
+  "cale_baza": "resurse/imagini/erori",
+  "eroare_default": {
+    "titlu": "Eroare Generică",
+    "text": "A apărut o eroare neașteptată în sistem. Ne cerem scuze pentru inconvenient.",
+    "imagine": "default.png"
+  },
+  "info_erori": [
+    {
+      "identificator": 404,
+      "status": true,
+      "titlu": "Eroare 404: Pagina nu a fost găsită",
+      "text": "Se pare că ai ieșit din ring. Pagina pe care o cauți nu există pe acest server.",
+      "imagine": "404.png"
+    },
+    {
+      "identificator": 403,
+      "status": true,
+      "titlu": "Eroare 403: Acces interzis",
+      "text": "Nu ai permisiunea de a accesa această secțiune. Accesul este restricționat.",
+      "imagine": "403.png"
+    },
+    {
+      "identificator": 400,
+      "status": true,
+      "titlu": "Eroare 400: Bad Request",
+      "text": "Cererea transmisă către server a fost invalidă.",
+      "imagine": "400.png"
+    }
+  ]
+}

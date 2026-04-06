@@ -1,0 +1,32 @@
+{
+  "name": "proiecttw",
+  "version": "1.0.0",
+  "description": "Site Echipamente Sportive",
+  "keywords": [
+    "finalround",
+    "echipamente",
+    "manusi",
+    "tibiere",
+    "box",
+    "kickbox",
+    "mma",
+    "arte",
+    "martiale",
+    "bjj",
+    "jiu",
+    "jitsu",
+    "proteze",
+    "fase"
+  ],
+  "license": "ISC",
+  "author": "Ionita Rares",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs": "^5.0.1",
+    "express": "^5.2.1"
+  }
+}

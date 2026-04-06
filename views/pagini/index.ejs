@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <title>FinalRound - Magazin Echipamente Sporturi de Contact</title>
+    <%- include("../fragmente/head.ejs") %>
+</head>
+<body>
+    <%- include("../fragmente/header.ejs") %>
+
+    <main>
+        <article id="bine-ati-venit" class="zona-1">
+            <hgroup>
+                <h2>Magazin online</h2>
+                <p>Performanta, protectie si durabilitate pentru campioni</p>
+            </hgroup>
+            
+            <p>
+                „FinalRound” este un magazin virtual, destinat comercializarii online de echipamente de protectie, imbracaminte specifica si accesorii pentru sporturile de contact si arte martiale. Misiunea noastra este sa oferim <b>cele mai bune echipamente MMA</b> si <b>oferte echipamente box</b> de pe piata.
+            </p>
+            <p>
+                <strong>Atentie! S-a dat startul campaniei de reduceri de primavara! Stocul este limitat!</strong>
+            </p>
+            
+            <blockquote cite="https://ro.wikipedia.org/wiki/Arte_mar%C8%9Biale_mixte">
+                Artele martiale mixte (<abbr title="Mixed Martial Arts">MMA</abbr>) sunt un sport de contact complet care permite o mare varietate de tehnici de lupta, dintr-o combinatie de alte sporturi de lupta si arte martiale.
+            </blockquote>
+
+            <section id="oferte-curente">
+                <h3>Reduceri echipament arte martiale</h3>
+                <p>
+                    Acum ai <em>sansa</em> sa iti completezi arsenalul. Categoriile noastre includ <b>manusi box</b>, <b>manusi mma</b>, <i>tibiere</i>, casti de protectie, accesorii esentiale precum <b>proteza</b> dentara, si imbracaminte de top precum <i>rashguard</i> sau <b>kimonouri</b>. Pentru antrenamente la sol folosim tehnici de <dfn title="Lupta la sol, cu prize si imobilizari">Grappling</dfn>.
+                </p>
+                <p>
+                    Pret promotional pentru sac de box premium: <s>450 RON</s> <ins>299 RON</ins>.
+                    Antrenorul tau ar spune: <q>Echipamentul bun previne accidentarile lungi.</q> (<cite>Ghidul Luptatorului Modern</cite>).
+                </p>
+
+                <figure>
+                    <picture>
+                        <source media="(min-width: 1024px)" srcset="/resurse/imagini/echipament_mare.jpg">
+                        <source media="(min-width: 768px)" srcset="/resurse/imagini/echipament_mediu.jpg">
+                        <img src="/resurse/imagini/echipament_mic.jpg" alt="Echipament arte martiale" title="Echipament pentru antrenament">
+                    </picture>
+                    <figcaption>Echipament pentru antrenament la sac</figcaption>
+                </figure>
+            </section>
+        </article>
+
+        <section id="statistici" class="zona-2">
+            <h2>Statistici si Detalii Magazin</h2>
+            
+            <div class="container-tabel">
+                <table>
+                    <caption><b>Cele mai vandute produse luna aceasta</b></caption>
+                    <colgroup>
+                        <col><col><col><col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Categorie</th>
+                            <th>Produs</th>
+                            <th>Stoc Curent</th>
+                            <th>Unitati Vandute</th>
+                        </tr>
+                    </thead>
+                    <tbody class="grup-hover">
+                        <tr>
+                            <td rowspan="2">Echipamente Protectie</td>
+                            <td>Manusi</td>
+                            <td>24</td>
+                            <td>150</td>
+                        </tr>
+                        <tr>
+                            <td>Tibiere</td>
+                            <td>10</td>
+                            <td>85</td>
+                        </tr>
+                    </tbody>
+                    <tbody class="grup-hover">
+                        <tr>
+                            <td>Imbracaminte</td>
+                            <td>Rashguards</td>
+                            <td>50</td>
+                            <td>200</td>
+                        </tr>
+                    </tbody>
+                    <tbody class="grup-hover">
+                        <tr>
+                            <td>Echipamente Antrenament</td>
+                            <td>Saci box</td>
+                            <td>5</td>
+                            <td>30</td>
+                        </tr>
+                    </tbody>
+                    <tbody class="grup-hover">
+                        <tr>
+                            <td>Accesorii</td>
+                            <td>Proteze</td>
+                            <td>120</td>
+                            <td>410</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="2">Total vanzari luna curenta</th>
+                            <td colspan="2">875 articole</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <section id="evenimente" class="zona-3">
+            <h3>Calendar Evenimente si Seminarii</h3>
+            <ul>
+                <li>
+                    <time datetime="2026-03-15T12:00">15 martie ora 12:00</time>, <b>Seminar BJJ cu Maestrul Silva</b> - Demonstratii de prize si strangulari pe tatami. Echipament necesar: <b>kimono de competitie</b>.
+                </li>
+                <li>
+                    <time datetime="2026-04-10T10:00">10 aprilie ora 10:00</time>, <b>Testare gratuita echipamente</b> - Vino in magazin sa incerci noile modele.
+                </li>
+            </ul>
+        </section>
+
+        <section class="zona-4">
+            <h3>Anunturi</h3>
+            <p>Noile transporturi de tibiere au ajuns in depozitul nostru central. Comenzile vor fi onorate incepand de luni.</p>
+        </section>
+
+        <section class="zona-5">
+            <h3>Date Conexiune</h3>
+            <p>Adresa ta IP este înregistrată temporar pentru securitate:</p>
+            <p style="font-weight: bold; color: var(--culoare-highlight);">IP: <%- locals.ip %></p>
+        </section>
+
+        <section class="zona-6" id="sectiune-video-vtt">
+            <h2>Antreneaza-te sa fii cel mai bun, cu FinalRound!</h2>
+            <p>Urmăriți acest scurt videoclip.</p>
+            
+            <video id="video-vtt" controls preload="metadata" poster="/resurse/imagini/poster_video.png">
+                <source src="/resurse/video/manusi_video.mp4" type="video/mp4">
+                <source src="/resurse/video/manusi_video.webm" type="video/webm">
+
+                <track src="/resurse/vtt/ro.vtt" kind="subtitles" srclang="ro" label="Română" default>
+                <track src="/resurse/vtt/en.vtt" kind="subtitles" srclang="en" label="English">
+
+                <p>Browserul tău nu suportă redarea acestui videoclip HTML5.</p>
+            </video>
+        </section>
+
+        <section class="zona-7">
+            <h3>Status Server</h3>
+            <p>Toate sistemele sunt online și funcționează la parametri normali.</p>
+        </section>
+
+        <div class="zona-8">
+            <section id="ghid-marimi-vizualizare">
+                <h2>Ghid de Marimi</h2>
+                <object data="/resurse/ghid_marimi_complet.pdf" type="application/pdf" height="400" style="border: 2px solid var(--culoare-secundara); border-radius: 5px;">
+                    <p>
+                        Browserul tau nu suporta afisarea directa a fisierelor PDF. 
+                        <a href="/resurse/ghid_marimi_complet.pdf" download="Ghid_Marimi_FinalRound.pdf">Descarca ghidul PDF de aici</a>.
+                    </p>
+                </object>
+            </section>
+            
+            <br>
+            
+            <aside>
+                <h3>Situatia magazinului si FAQ</h3>
+                
+                <details>
+                    <summary>Afluenta in magazinul fizic chiar acum</summary>
+                    <p>Clienti prezenti dimineata: <meter value="12" min="0" max="100" low="30" high="80" optimum="10">12</meter></p>
+                    <p>Aglomeratie estimata dupa-amiaza: <meter value="90" min="0" max="100" low="30" high="80" optimum="10">90</meter></p>
+                </details>
+
+                <details>
+                    <summary>Intrebari frecvente despre livrare</summary>
+                    <dl>
+                        <dt>In cat timp se face livrarea?</dt>
+                        <dd>Livrarea se face prin curier rapid in 24-48 de ore.</dd>
+                        <dt>Care sunt metodele de plata?</dt>
+                        <dd>Online cu cardul securizat sau ramburs.</dd>
+                    </dl>
+                </details>
+                
+                <details>
+                    <summary>Stiinta protectiei: De ce ai nevoie de manusi bune?</summary>
+                    <p>Conform legilor fizicii, forta medie de impact se calculeaza asa:</p>
+                    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" style="font-size: 1.2em; margin: 15px 0;">
+                        <mrow>
+                            <msub><mi>F</mi><mi>med</mi></msub>
+                            <mo>=</mo>
+                            <mfrac>
+                                <mrow>
+                                    <mi>m</mi><mo>⋅</mo><mo>(</mo><msub><mi>v</mi><mi>i</mi></msub><mo>-</mo><msub><mi>v</mi><mi>f</mi></msub><mo>)</mo>
+                                </mrow>
+                                <mrow><mo>Δ</mo><mi>t</mi></mrow>
+                            </mfrac>
+                        </mrow>
+                    </math>
+                    <p>Crescand timpul de impact <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mo>Δ</mo><mi>t</mi></mrow></math>, forta scade!</p>
+                </details>
+                
+                <p>Afla mai multe pe <a href="https://en.wikipedia.org/wiki/Mixed_martial_arts">Wikipedia</a> sau pe <a href="https://www.ufc.com" target="_blank">site-ul UFC</a>.</p>
+            </aside>
+
+            <section id="media-video">
+                <h2>Tehnici si Antrenamente</h2>
+                <div class="container-taburi-video">
+                    <div class="butoane-taburi">
+                        <a href="https://www.youtube.com/embed/kKDHdsVN0b8?autoplay=1&mute=1&loop=1&playlist=kKDHdsVN0b8,hGPQnga7M3s,IJo4Qcnm6UU" target="fereastra-video" class="tab-link">Tutorial Box Baza</a>
+                        <a href="https://www.youtube.com/embed/hGPQnga7M3s?autoplay=1&mute=1&loop=1&playlist=hGPQnga7M3s,IJo4Qcnm6UU,kKDHdsVN0b8" target="fereastra-video" class="tab-link">Antrenament MMA</a>
+                        <a href="https://www.youtube.com/embed/IJo4Qcnm6UU?autoplay=1&mute=1&loop=1&playlist=IJo4Qcnm6UU,kKDHdsVN0b8,hGPQnga7M3s" target="fereastra-video" class="tab-link">Meci Demonstratie</a>
+                    </div>
+                    <iframe 
+                        name="fereastra-video"
+                        class="iframe-stilizat"
+                        src="https://www.youtube.com/embed/kKDHdsVN0b8?autoplay=1&mute=1&loop=1&playlist=kKDHdsVN0b8,hGPQnga7M3s,IJo4Qcnm6UU" 
+                        title="Player Video Antrenamente MMA si Box" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <%- include("../fragmente/footer.ejs") %>
+</body>
+</html>

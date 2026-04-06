@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <title>Eroare - FinalRound</title>
+    <%- include("../fragmente/head.ejs") %>
+</head>
+<body>
+    <%- include("../fragmente/header.ejs") %>
+
+    <main style="display: block; padding: 50px 10vw;">
+        <article class="zona-1" style="text-align: center;">
+            <h2 style="color: var(--culoare-highlight);"><%- locals.titlu %></h2>
+            <p><strong><%- locals.text %></strong></p>
+            
+            <% if (locals.imagine) { %>
+                <img src="<%- locals.imagine %>" alt="Imagine Eroare" style="max-width: 400px; margin: 30px auto; border-radius: 8px; border: 2px solid var(--culoare-secundara);">
+            <% } %>
+
+            <br>
+            <a href="/" class="tab-link" style="display: inline-block;">Întoarce-te Acasă</a>
+        </article>
+    </main>
+
+    <%- include("../fragmente/footer.ejs") %>
+</body>
+</html>
