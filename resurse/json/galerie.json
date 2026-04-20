@@ -1,0 +1,92 @@
+{
+    "cale_galerie": "/resurse/imagini/galerie",
+    "anotimpuri": {
+        "ianuarie": "iarna", "februarie": "iarna", "martie": "primavara",
+        "aprilie": "primavara", "mai": "primavara", "iunie": "vara",
+        "iulie": "vara", "august": "vara", "septembrie": "toamna",
+        "octombrie": "toamna", "noiembrie": "toamna", "decembrie": "iarna"
+    },
+    "imagini": [
+        {
+            "cale_fisier": "manusi_box.jpg",
+            "titlu": "Mănuși Box Pro",
+            "text_descriere": "Mănuși de box premium din piele naturală, ideale pentru sparring intens.",
+            "anotimp": "primavara"
+        },
+        {
+            "cale_fisier": "tibiere_mma.jpg",
+            "titlu": "Tibiere MMA",
+            "text_descriere": "Tibiere ușoare și flexibile pentru mobilitate maximă la sol și în picioare.",
+            "anotimp": "primavara"
+        },
+        {
+            "cale_fisier": "sac_box.jpg",
+            "titlu": "Sac de Box 40kg",
+            "text_descriere": "Sac de box durabil, umplut uniform pentru o experiență de antrenament optimă.",
+            "anotimp": "primavara"
+        },
+        {
+            "cale_fisier": "casca_protectie.jpg",
+            "titlu": "Cască Protecție",
+            "text_descriere": "Cască cu protecție pentru pomeți, excelentă pentru sesiunile de sparring.",
+            "anotimp": "primavara"
+        },
+        {
+            "cale_fisier": "rashguard.jpg",
+            "titlu": "Rashguard BJJ",
+            "text_descriere": "Rashguard cu mâneci lungi, reglează temperatura și previne iritațiile pe tatami.",
+            "anotimp": "primavara"
+        },
+        {
+            "cale_fisier": "pantaloni_scurti.jpg",
+            "titlu": "Pantaloni de Luptă",
+            "text_descriere": "Pantaloni scurți cu fante laterale adânci pentru a permite loviturile înalte (high kicks).",
+            "anotimp": "primavara"
+        },
+        {
+            "cale_fisier": "proteza_dentara.jpg",
+            "titlu": "Proteză Termomodelabilă",
+            "text_descriere": "Proteză dentară ușor de modelat în apă fiartă, oferă protecție maximă la impact.",
+            "anotimp": "primavara"
+        },
+        {
+            "cale_fisier": "fase_box.jpg",
+            "titlu": "Fașe Elastice 4.5m",
+            "text_descriere": "Fașe lungi pentru încheieturi, previn accidentările și stabilizează mâna în mănușă.",
+            "anotimp": "primavara"
+        },
+        {
+            "cale_fisier": "coarda_viteza.jpg",
+            "titlu": "Coardă de Viteză",
+            "text_descriere": "Coardă din cablu subțire cu rulmenți, pentru îmbunătățirea condiției fizice și a jocului de picioare.",
+            "anotimp": "primavara"
+        },
+        {
+            "cale_fisier": "gi_bjj.jpg",
+            "titlu": "Kimono BJJ",
+            "text_descriere": "Kimono rezistent, din bumbac, potrivit pentru competiții și antrenamente de Brazilian Jiu-Jitsu.",
+            "anotimp": "primavara",
+            "licenta": "CC-BY",
+            "autor": "FotografSportiv",
+            "link_autor": "https://exemplu.com/autor"
+        },
+        {
+            "cale_fisier": "tricou_compresie.jpg",
+            "titlu": "Tricou Compresie",
+            "text_descriere": "Ideal pentru antrenamente cardio și refacere musculară.",
+            "anotimp": "primavara"
+        },
+        {
+            "cale_fisier": "manusi_mma.jpg",
+            "titlu": "Mănuși MMA",
+            "text_descriere": "Mănuși cu degete libere pentru tehnici de prindere și lovire.",
+            "anotimp": "primavara"
+        },
+        {
+            "cale_fisier": "geanta_sport.jpg",
+            "titlu": "Geantă Echipament",
+            "text_descriere": "Geantă spațioasă și ventilată pentru tot echipamentul tău.",
+            "anotimp": "primavara"
+        }
+    ]
+}

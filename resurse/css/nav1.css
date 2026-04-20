@@ -148,7 +148,9 @@ body {
   .meniu-principal .meniu-lista .meniu-item > a::after {
     display: none;
   }
-
+  .meniu-principal .meniu-lista .meniu-item > a {
+    /* SCHIMBARE AICI: Highlight gri cu text negru, fix ca in poza ta */
+  }
   .meniu-principal .meniu-lista .meniu-item > a:hover {
     background-color: var(--subnav-hover-bg);
     color: var(--subnav-text);
@@ -219,4 +221,4 @@ body {
     transform: rotate(0deg);
     transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out, visibility 0s, max-height 0s;
   }
-}/*# sourceMappingURL=nav1.css.map */
+}

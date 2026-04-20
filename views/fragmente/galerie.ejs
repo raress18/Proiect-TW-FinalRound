@@ -1,0 +1,32 @@
+<section id="sectiune-galerie-statica">
+    <h2>Echipamente Recomandate Acest Sezon</h2>
+    <div id="grid-galerie-statica">
+        <% if (locals.imaginiGalerie && locals.imaginiGalerie.length > 0) { %>
+            <% for (let i = 0; i < locals.imaginiGalerie.length; i++) { 
+                let img = locals.imaginiGalerie[i];
+            %>
+                <figure class="item-galerie item-<%= i+1 %>">
+                    <picture>
+                        <source media="(max-width: 600px)" srcset="<%= img.cale_web_mica %>">
+                        <source media="(max-width: 1024px)" srcset="<%= img.cale_web_medie %>">
+                        <img src="<%= img.cale_web_mare %>" 
+                             alt="<%= img.alt || img.titlu || img.cale_fisier %>" 
+                             title="<%= img.text_descriere %>">
+                    </picture>
+                    <figcaption>
+                        <span class="index-roman-galerie"></span>
+                        <%= img.text_descriere %>
+                        
+                        <% if (img.licenta === "CC-BY") { %>
+                            <div class="atribuire-licenta">
+                                Foto de <a href="<%= img.link_autor %>" target="_blank"><%= img.autor %></a> (Licență CC-BY)
+                            </div>
+                        <% } %>
+                    </figcaption>
+                </figure>
+            <% } %>
+        <% } else { %>
+            <p style="text-align: center; color: var(--culoare-highlight);">Nu s-au găsit imagini pentru sezonul curent.</p>
+        <% } %>
+    </div>
+</section>

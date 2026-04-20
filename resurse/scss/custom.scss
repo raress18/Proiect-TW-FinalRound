@@ -1,0 +1,44 @@
+/* =========================================
+   CUSTOMIZARE BOOTSTRAP (Cerința Etapa 5)
+========================================= */
+
+// 1. Culori de background pentru 2 teme personalizate
+$primary: #d20a0a; // Culoarea ta roșie
+$success: #28a745;
+$dark: #1a1a1a;
+
+// 2. Culori de font (litere)
+$body-color: #333333;
+$btn-primary-color: #ffffff; // Culoarea textului pe butoane primary
+
+// 3. Dimensiuni de ecran diferite (Custom Breakpoints)
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 850px,  // Schimbat de la 768px
+  lg: 1150px, // Schimbat de la 992px
+  xl: 1200px
+);
+
+// 4. Dimensiunea razelor de border (Border Radius)
+$border-radius: 15px;
+$border-radius-sm: 10px;
+
+// 5. Dimensiunea headingurilor
+$h1-font-size: 2.8rem;
+$h2-font-size: 2rem;
+
+// 6. Familia de font implicită
+$font-family-sans-serif: 'Verdana', sans-serif;
+
+// 7. Variabilă extra: spațierea butoanelor
+$btn-padding-y: 0.75rem;
+
+// IMPORTUL BOOTSTRAP (Trebuie să fie DUPĂ variabilele de mai sus)
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+/* 8. Corectare Bootstrap */
+// Resetăm regulile care ar putea intra în conflict cu layout-ul tău Grid
+main {
+    display: grid !important; // Ne asigurăm că rămâne grid-ul tău
+}

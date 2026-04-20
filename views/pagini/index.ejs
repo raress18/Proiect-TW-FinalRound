@@ -7,10 +7,14 @@
 <body>
     <%- include("../fragmente/header.ejs") %>
 
+    <div class="container-text-plimbaret">
+        <span class="text-plimbaret">⚡ OFERTĂ SPECIALĂ: La orice comandă de peste 500 RON primești o pereche de fașe de box cadou! Stoc limitat! ⚡</span>
+    </div>
+
     <main>
         <article id="bine-ati-venit" class="zona-1">
             <hgroup>
-                <h2>Magazin online</h2>
+                <h2 class="text-reflexie" data-text="Magazin online">Magazin online</h2>
                 <p>Performanta, protectie si durabilitate pentru campioni</p>
             </hgroup>
             
@@ -44,6 +48,8 @@
                     <figcaption>Echipament pentru antrenament la sac</figcaption>
                 </figure>
             </section>
+            
+            <hr style="margin-top: 20px;">
         </article>
 
         <section id="statistici" class="zona-2">
@@ -125,12 +131,20 @@
         <section class="zona-4">
             <h3>Anunturi</h3>
             <p>Noile transporturi de tibiere au ajuns in depozitul nostru central. Comenzile vor fi onorate incepand de luni.</p>
+            
+            <br>
+            <div class="container-duotone">
+                <img src="/resurse/imagini/echipament_mic.jpg" alt="Imagine Duotone" style="border-radius: 8px;">
+            </div>
         </section>
 
         <section class="zona-5">
             <h3>Date Conexiune</h3>
             <p>Adresa ta IP este înregistrată temporar pentru securitate:</p>
             <p style="font-weight: bold; color: var(--culoare-highlight);">IP: <%- locals.ip %></p>
+            <h3>Acțiuni Rapide</h3>
+                 <button class="btn btn-primary btn-lg">Profită de Ofertă acum!</button>
+                <p style="margin-top: 10px; font-weight: bold; color: var(--culoare-highlight);"></p>
         </section>
 
         <section class="zona-6" id="sectiune-video-vtt">
@@ -226,6 +240,8 @@
             </section>
         </div>
     </main>
+
+    <%- include("../fragmente/galerie.ejs") %>
 
     <%- include("../fragmente/footer.ejs") %>
 </body>

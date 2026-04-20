@@ -1,0 +1,251 @@
+@charset "UTF-8";
+/* =========================================
+   1. GALERIE STATICA (Cerinta Galerie)
+========================================= */
+#sectiune-galerie-statica {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  background-color: #333; /* Fundal gri închis, asortat cu bannerul */
+  padding: 40px 0;
+  color: var(--culoare-fundal-zone);
+  overflow-x: hidden;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+#sectiune-galerie-statica h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--culoare-fundal-zone);
+}
+
+#grid-galerie-statica {
+  display: grid;
+  gap: 15px;
+  counter-reset: contor-galerie;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spatiere-laterala);
+}
+
+.item-galerie {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  /* 1. Schimbă fundalul în alb (sau culoarea fundalului pozei tale) */
+  background-color: #ffffff;
+  border: 3px solid var(--culoare-fundal-zone);
+  border-radius: 5px;
+}
+.item-galerie picture, .item-galerie img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* 2. Schimbă din cover în contain */
+  object-fit: contain;
+  transition: transform 0.125s ease-in-out, opacity 0.125s ease-in-out, border-radius 0.125s ease-in-out;
+  transform-origin: top center;
+}
+.item-galerie figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
+  font-size: 0.85rem;
+  text-align: center;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+.item-galerie .atribuire-licenta {
+  font-size: 0.7rem;
+  margin-top: 5px;
+  color: #ccc;
+}
+.item-galerie .atribuire-licenta a {
+  color: var(--culoare-principala);
+}
+.item-galerie:hover img {
+  transform: scale(1.4);
+  opacity: 0.5;
+  border-radius: 15px;
+}
+.item-galerie:hover figcaption {
+  transform: translateY(0);
+}
+
+.index-roman-galerie::before {
+  counter-increment: contor-galerie;
+  content: counter(contor-galerie, lower-roman) ") ";
+  font-weight: bold;
+  color: var(--culoare-principala);
+}
+
+/* --- Layout Grid Responsive --- */
+/* Ecran Mare: grid 5x3 cu spații goale la img 5 și img 10 (corespunzător zonelor) */
+@media (min-width: 1025px) {
+  #grid-galerie-statica {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 250px);
+    /* 13 imagini impartite in 5 randuri, cu 2 goluri (.) */
+    grid-template-areas: "img1  img2  img3" "img4   .    img5" "img6  img7  img8" "img9   .    img10" "img11 img12 img13";
+  }
+  .item-1 {
+    grid-area: img1;
+  }
+  .item-2 {
+    grid-area: img2;
+  }
+  .item-3 {
+    grid-area: img3;
+  }
+  .item-4 {
+    grid-area: img4;
+  }
+  .item-5 {
+    grid-area: img5;
+  }
+  .item-6 {
+    grid-area: img6;
+  }
+  .item-7 {
+    grid-area: img7;
+  }
+  .item-8 {
+    grid-area: img8;
+  }
+  .item-9 {
+    grid-area: img9;
+  }
+  .item-10 {
+    grid-area: img10;
+  }
+  .item-11 {
+    grid-area: img11;
+  }
+  .item-12 {
+    grid-area: img12;
+  }
+  .item-13 {
+    grid-area: img13;
+  }
+}
+/* Ecran Mediu: 2 coloane (se anulează template-areas pentru a curge normal, una după alta) */
+@media (max-width: 1024px) and (min-width: 768px) {
+  #grid-galerie-statica {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 250px;
+    grid-template-areas: none; /* Anulăm zonele forțate de pe desktop */
+  }
+  .item-galerie {
+    grid-area: auto;
+  } /* Lăsăm CSS Grid să le așeze automat */
+}
+/* Ecran Mic: 1 coloană (se așează una sub alta) */
+@media (max-width: 767px) {
+  #grid-galerie-statica {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 300px;
+    grid-template-areas: none;
+  }
+  .item-galerie {
+    grid-area: auto;
+  }
+}
+/* =========================================
+   2. EFECTE CSS INDIVIDUALE
+========================================= */
+/* --- Anunț Text Plimbăreț (Cerinta 0.05p) --- */
+.container-text-plimbaret {
+  /* Efect de lungire pe tot ecranul */
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  overflow: hidden;
+  background-color: #333; /* Fundal gri închis */
+  color: #eee; /* Text alb-gri deschis */
+  padding: 15px 0;
+  margin-bottom: 30px;
+  border-top: 1px solid #555;
+  border-bottom: 1px solid #555;
+}
+
+.text-plimbaret {
+  display: inline-block;
+  white-space: nowrap;
+  font-weight: bold;
+  font-size: 1.2rem;
+  animation: plimbareOrizontala 15s linear infinite;
+}
+
+@keyframes plimbareOrizontala {
+  0% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+/* Duotone (Cerinta 0.05p) */
+.container-duotone {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.container-duotone img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.container-duotone::before, .container-duotone::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: lighten;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 2;
+  pointer-events: none;
+}
+.container-duotone::before {
+  left: 0;
+  background-color: blue;
+  transform: translateX(-100%);
+}
+.container-duotone::after {
+  right: 0;
+  background-color: purple;
+  transform: translateX(100%);
+}
+.container-duotone:hover::before, .container-duotone:hover::after {
+  transform: translateX(0);
+}
+
+/* Reflexie Text (Cerinta 0.15p) */
+.text-reflexie {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+.text-reflexie::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  transform-origin: top;
+  transform: scaleY(-1);
+  filter: blur(2px);
+  opacity: 0.4;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 20%, black 100%);
+  mask-image: linear-gradient(to bottom, transparent 20%, black 100%);
+  transition: all 0.4s ease;
+}
+.text-reflexie:hover::after {
+  transform: scaleY(-1.6) translateY(-5px);
+  filter: blur(4px);
+  opacity: 0.6;
+}

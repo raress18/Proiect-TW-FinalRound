@@ -1,4 +1,4 @@
-/* cerinta 1 , 6: definirea variabilelor css */
+
 :root {
     --culoare-fundal-pagina: #e6e6e6; 
     --culoare-fundal-zone: #ffffff;   
@@ -8,17 +8,17 @@
     --culoare-highlight: #ff0000;     
     --culoare-border: #cccccc;       
 
-    /* cerinta 6: variabile de spatiere initiale  */
-    --spatiere-laterala: 10vw;  /* a */
-    --spatiere-grid: 30px;      /* b*/
-    --padding-text: 30px;       /* d */
+  
+    --spatiere-laterala: 5vw;  
+    --spatiere-grid: 30px;      
+    --padding-text: 30px;       
     
-    /* cerinta 6: variabile media  */
-    --media-max-width: 1000px;  /* e */
-    --media-min-width: 250px;   /* e */
+    
+    --media-max-width: 1200px;  
+    --media-min-width: 250px;   
 }
 
-/*cerinta 2 , 6*/
+
 html {
     font-size: 14px; 
     transition: font-size 0.4s ease-in-out; 
@@ -114,11 +114,11 @@ main {
     main {
         grid-template-columns: 1fr 1fr 1.5fr; 
         grid-template-areas: 
-            "z1 z1 z1"
-            "z2 z2 z8"
-            "z3 z6 z8"
-            "z5 z6 z8"
-            "z5 z4 z7";
+            "z1 z1 z1 z1"
+            "z2 z2 z8 z8"
+            "z3 z6 z8 z8"
+            "z5 z6 z8 z8"
+            "z5 z4 z4 z7";
     }
 }
 
@@ -129,7 +129,7 @@ header, footer {
 }
 
 header {
-    position: relative; /* IMPORTANT pt meniul absolut de pe mobil */
+    position: relative; 
     display: flex;
     justify-content: space-between; 
     align-items: center; 
@@ -184,7 +184,8 @@ footer {
     padding: 0;
 }
 
-.footer-contact a, .footer-linkuri a {
+.footer-contact a, .footer-contact a:visited, 
+.footer-linkuri a, .footer-linkuri a:visited {
     color: var(--culoare-fundal-zone);
     text-decoration: none;
     font-weight: bold;
@@ -204,7 +205,7 @@ footer {
 
 @media (max-width: 767px) {
     header {
-        flex-direction: row-reverse; /* Pune meniul in stanga, sigla in dreapta */
+        flex-direction: row-reverse; 
         gap: 0;
         padding: 15px var(--spatiere-laterala);
     }
@@ -217,30 +218,30 @@ img, iframe, video, object {
     width: 100%; 
     max-width: var(--media-max-width); 
     min-width: var(--media-min-width); 
-    height: auto;
+    height: auto !important; 
     display: block; 
     margin: 0 auto; 
 }
 
-iframe, object { height: 400px; }
-
-@media (max-width: 767px) {
-    iframe, object { height: 250px; }
+iframe, video { 
+    aspect-ratio: 4 / 3 !important; 
+    max-height: none !important; 
 }
 
 .container-taburi-video {
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse; 
+    align-items: flex-start; 
     padding: 20px 0;
 }
 
 .butoane-taburi {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start; 
-    gap: 8px; 
-    padding-left: 20px; 
-    margin-bottom: -4px; 
+    flex-direction: column; 
+    gap: 4px; 
+    padding-top: 15px; 
+    margin-left: -4px; 
+    margin-bottom: 0; 
     position: relative;
     z-index: 2; 
 }
@@ -248,24 +249,34 @@ iframe, object { height: 400px; }
 .tab-link {
     background-color: #e8e8e8; 
     color: var(--culoare-text);
-    padding: 10px 20px;
-    text-align: center;
+    padding: 6px 12px; 
+    font-size: 0.8rem; 
+    
+    white-space: normal; 
+    text-align: center; 
+    max-width: 130px; 
+    
     text-decoration: none;
     font-weight: bold;
-    font-size: 0.95rem;
     border: 4px solid var(--culoare-secundara);
-    border-radius: 12px 12px 0 0; 
+    border-radius: 0 10px 10px 0; 
     transition: all 0.3s ease; 
+}
+
+.tab-link::before {
+    font-size: 1.1em !important; 
+    margin-right: 5px; 
 }
 
 .tab-link:hover, .tab-link:focus {
     background-color: var(--culoare-principala); 
     color: var(--culoare-fundal-zone);
-    padding-top: 15px; 
-    margin-top: -5px; 
+    padding-right: 18px; 
+    margin-right: -4px; 
 }
 
 .iframe-stilizat {
+    flex: 1; 
     border: 4px solid var(--culoare-secundara);
     border-radius: 8px;
     background-color: var(--culoare-secundara); 
@@ -274,13 +285,21 @@ iframe, object { height: 400px; }
 }
 
 @media (max-width: 767px) {
-    .butoane-taburi {
-        flex-wrap: wrap;
-        padding-left: 10px;
+    .container-taburi-video {
+        flex-direction: column; 
     }
+    
+    .butoane-taburi {
+        flex-direction: row; 
+        flex-wrap: wrap; 
+        margin-left: 0; 
+        margin-bottom: -4px; 
+        padding-top: 0;
+        justify-content: center; 
+    }
+    
     .tab-link {
-        font-size: 0.8rem;
-        padding: 8px 12px;
+        border-radius: 10px 10px 0 0; 
     }
 }
 
@@ -292,7 +311,7 @@ iframe, object { height: 400px; }
 
 table {
     width: 100%;
-    border-collapse: collapse; 
+    border-collapse: collapse;
     background-color: var(--culoare-fundal-zone);
     text-align: center;
 }
@@ -317,8 +336,10 @@ col:nth-child(odd) { border-right: 2px solid var(--culoare-secundara); }
 col:nth-child(even) { border-right: 2px solid var(--culoare-principala); }
 col:last-child { border-right: none; }
 
-tbody tr { transition: box-shadow 0.5s ease; }
-tbody tr:hover { box-shadow: inset 0 0 15px rgba(210, 10, 10, 0.4); }
+tbody:hover tr { 
+    transition: box-shadow 0.5s ease;
+    box-shadow: inset 0 0 15px rgba(210, 10, 10, 0.4); 
+}
 
 .buton-top {
     position: fixed;
@@ -330,7 +351,7 @@ tbody tr:hover { box-shadow: inset 0 0 15px rgba(210, 10, 10, 0.4); }
     height: 40px; 
     background-color: var(--culoare-secundara); 
     border: 1.5px solid var(--culoare-border); 
-    border-radius: 50%; 
+    border-radius: 30px 30px 0 0; 
     box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
     text-align: center;
     line-height: 40px;
@@ -399,6 +420,8 @@ math mo {
 math mo:contains("="), math mo:contains("-") {
     margin: 0 8px;
 }
+
+/*pana aici etapa 2*/
 
 @media print {
     
