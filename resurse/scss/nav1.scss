@@ -12,6 +12,25 @@ body {
 $bp-tablet: 1024px;
 $bp-mobile: 767px;
 
+/* --- BONUS: Animație cu minim 3 cadre cheie (Culoare, Transformare, Opacitate) --- */
+@keyframes aparitieBare {
+    0% {
+        opacity: 0;
+        transform: scale(0.2) rotate(-45deg) translateX(-50px);
+        background-color: var(--subnav-hover-text); /* Începe cu roșu */
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2) rotate(10deg) translateX(10px);
+        background-color: #888; /* Trece prin gri */
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg) translateX(0);
+        background-color: var(--nav-text); /* Finalizează pe alb */
+    }
+}
+
 %reset-list {
     list-style: none;
     margin: 0;
@@ -118,14 +137,45 @@ $bp-mobile: 767px;
         width: auto; 
         position: static; 
 
+        /* --- MODIFICARE BONUS: Containerul și barele hamburger --- */
         .hamburger-label {
             display: block;
-            color: var(--nav-text);
-            padding: 0;
-            margin: 0;
-            font-size: 2.5rem; 
+            padding: 15px;
             cursor: pointer;
-            text-align: left;
+            
+            .hamburger-container {
+                display: block !important;
+                position: relative !important;
+                width: 35px !important;
+                height: 25px !important;
+
+                .bara {
+                    display: block !important;
+                    position: absolute !important;
+                    left: 0 !important;
+                    width: 100% !important;
+                    height: 4px !important;
+                    border-radius: 2px !important;
+                    
+                    /* Forțăm culoarea albă */
+                    background-color: var(--nav-text);
+                    
+                    /* Forțăm animația să ruleze peste orice alt CSS */
+                    animation: aparitieBare 0.7s ease-out forwards !important;
+                }
+
+                /* Forțăm pozițiile ca să nu le strice alt fișier */
+                .bara:nth-child(1) { top: 0 !important; }
+                .bara:nth-child(2) { top: 10px !important; }
+                .bara:nth-child(3) { top: 20px !important; }
+
+                /* Forțăm delay-ul ca să apară pe rând */
+                @for $i from 1 through 3 {
+                    .bara:nth-child(#{$i}) {
+                        animation-delay: #{$i * 300}ms !important;
+                    }
+                }
+            }
         }
 
         .meniu-lista {
@@ -139,8 +189,6 @@ $bp-mobile: 767px;
             height: auto; 
             max-height: 0;
             overflow: hidden;
-            
-            /* SCHIMBARE AICI: Fundal negru in loc de gri */
             background-color: var(--nav-bg); 
             z-index: 1000;
 
@@ -158,14 +206,13 @@ $bp-mobile: 767px;
                 
                 > a {
                     justify-content: center; 
-                    border-bottom: 1px solid #333; /* Am mai inchis putin bordura sa arate clean */
+                    border-bottom: 1px solid #333; 
                     padding: 25px 20px; 
                     font-size: 1.3rem; 
                     transition: background-color 0.3s, color 0.3s;
                     
                     &::after { display: none; }
                     
-                    /* SCHIMBARE AICI: Highlight gri cu text negru, fix ca in poza ta */
                     &:hover { 
                         background-color: var(--subnav-hover-bg); 
                         color: var(--subnav-text);
@@ -173,7 +220,7 @@ $bp-mobile: 767px;
                 }
 
                 &.acasa-item {
-                    background-color: #1a1a1a; /* Un negru o idee mai deschis pentru Home */
+                    background-color: #1a1a1a;
                     > a {
                         font-size: 1.6rem; 
                         .text-meniu { display: none; }

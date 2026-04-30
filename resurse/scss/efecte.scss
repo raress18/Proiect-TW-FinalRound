@@ -1,10 +1,7 @@
-/* =========================================
-   1. GALERIE STATICA (Cerinta Galerie)
-========================================= */
 #sectiune-galerie-statica {
     width: 100vw;
     margin-left: calc(-50vw + 50%);
-    background-color: #333; /* Fundal gri închis, asortat cu bannerul */
+    background-color: #333; /* Fundal gri inchis, asortat cu bannerul */
     padding: 40px 0;
     color: var(--culoare-fundal-zone);
     overflow-x: hidden;
@@ -32,7 +29,7 @@
     position: relative;
     overflow: hidden;
     
-    /* 1. Schimbă fundalul în alb (sau culoarea fundalului pozei tale) */
+    /* 1. Schimba fundalul in alb (sau culoarea fundalului pozei tale) */
     background-color: #ffffff; 
     
     border: 3px solid var(--culoare-fundal-zone);
@@ -43,7 +40,7 @@
         width: 100%;
         height: 100%;
         
-        /* 2. Schimbă din cover în contain */
+        /* 2. Schimba din cover in contain */
         object-fit: contain; 
         
         transition: transform 0.125s ease-in-out, opacity 0.125s ease-in-out, border-radius 0.125s ease-in-out;
@@ -92,7 +89,7 @@
 
 /* --- Layout Grid Responsive --- */
 
-/* Ecran Mare: grid 5x3 cu spații goale la img 5 și img 10 (corespunzător zonelor) */
+/* Ecran Mare: grid 5x3 cu spatii goale la img 5 si img 10 (corespunzator zonelor) */
 @media (min-width: 1025px) {
     #grid-galerie-statica {
         grid-template-columns: repeat(3, 1fr);
@@ -113,17 +110,17 @@
     .item-13 { grid-area: img13; }
 }
 
-/* Ecran Mediu: 2 coloane (se anulează template-areas pentru a curge normal, una după alta) */
+/* Ecran Mediu: 2 coloane (se anuleaza template-areas pentru a curge normal, una dupa alta) */
 @media (max-width: 1024px) and (min-width: 768px) {
     #grid-galerie-statica { 
         grid-template-columns: repeat(2, 1fr); 
         grid-auto-rows: 250px; 
-        grid-template-areas: none; /* Anulăm zonele forțate de pe desktop */
+        grid-template-areas: none; /* Anulam zonele fortate de pe desktop */
     }
-    .item-galerie { grid-area: auto; } /* Lăsăm CSS Grid să le așeze automat */
+    .item-galerie { grid-area: auto; } /* Lasam CSS Grid sa le aseze automat */
 }
 
-/* Ecran Mic: 1 coloană (se așează una sub alta) */
+/* Ecran Mic: 1 coloana (se aseaza una sub alta) */
 @media (max-width: 767px) {
     #grid-galerie-statica { 
         grid-template-columns: 1fr; 
@@ -134,18 +131,15 @@
 }
 
 
-/* =========================================
-   2. EFECTE CSS INDIVIDUALE
-========================================= */
 
-/* --- Anunț Text Plimbăreț (Cerinta 0.05p) --- */
+/* --- Anunt Text Plimbaret (Cerinta 0.05p) --- */
 .container-text-plimbaret {
     /* Efect de lungire pe tot ecranul */
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     
     overflow: hidden; 
-    background-color: #333; /* Fundal gri închis */
+    background-color: #333; /* Fundal gri inchis */
     color: #eee;           /* Text alb-gri deschis */
     padding: 15px 0;
     margin-bottom: 30px;

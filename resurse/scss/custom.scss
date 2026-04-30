@@ -1,9 +1,5 @@
-/* =========================================
-   CUSTOMIZARE BOOTSTRAP (Cerința Etapa 5)
-========================================= */
-
 // 1. Culori de background pentru 2 teme personalizate
-$primary: #d20a0a; // Culoarea ta roșie
+$primary: #d20a0a; 
 $success: #28a745;
 $dark: #1a1a1a;
 
@@ -15,8 +11,8 @@ $btn-primary-color: #ffffff; // Culoarea textului pe butoane primary
 $grid-breakpoints: (
   xs: 0,
   sm: 576px,
-  md: 850px,  // Schimbat de la 768px
-  lg: 1150px, // Schimbat de la 992px
+  md: 850px,  
+  lg: 1150px, 
   xl: 1200px
 );
 
@@ -28,17 +24,17 @@ $border-radius-sm: 10px;
 $h1-font-size: 2.8rem;
 $h2-font-size: 2rem;
 
-// 6. Familia de font implicită
+// 6. Familia de font implicita
 $font-family-sans-serif: 'Verdana', sans-serif;
 
-// 7. Variabilă extra: spațierea butoanelor
+// 7. Variabila extra: spatierea butoanelor
 $btn-padding-y: 0.75rem;
 
-// IMPORTUL BOOTSTRAP (Trebuie să fie DUPĂ variabilele de mai sus)
+// IMPORTUL BOOTSTRAP (Trebuie sa fie DUPA variabilele de mai sus)
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 /* 8. Corectare Bootstrap */
-// Resetăm regulile care ar putea intra în conflict cu layout-ul tău Grid
+// Resetam regulile care ar putea intra in conflict cu layout-ul 
 main {
-    display: grid !important; // Ne asigurăm că rămâne grid-ul tău
+    display: grid !important; // Ne asiguram ca ramane grid-ul 
 }
