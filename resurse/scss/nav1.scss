@@ -16,18 +16,23 @@ $bp-mobile: 767px;
 @keyframes aparitieBare {
     0% {
         opacity: 0;
-        transform: scale(0.2) rotate(-45deg) translateX(-50px);
-        background-color: var(--subnav-hover-text); /* Începe cu roșu */
+        transform: scale(0.2) rotate(-45deg) translateX(-40px);
+        background-color: var(--subnav-hover-text);
+        /* Începe cu roșu */
     }
+
     50% {
         opacity: 0.5;
-        transform: scale(1.2) rotate(10deg) translateX(10px);
-        background-color: #888; /* Trece prin gri */
+        transform: scale(1.2) rotate(0deg) translateX(10px);
+        background-color: #888;
+        /* Trece prin gri */
     }
+
     100% {
         opacity: 1;
         transform: scale(1) rotate(0deg) translateX(0);
-        background-color: var(--nav-text); /* Finalizează pe alb */
+        background-color: var(--nav-text);
+        /* Finalizează pe alb */
     }
 }
 
@@ -37,25 +42,28 @@ $bp-mobile: 767px;
     padding: 0;
 }
 
+//sus
 .meniu-principal {
     background-color: var(--nav-bg);
     position: relative;
     z-index: 1000;
-    
-    .hamburger-checkbox, .hamburger-label {
+
+    //ascunde pe mobil
+    .hamburger-checkbox,
+    .hamburger-label {
         display: none;
     }
 
     .meniu-lista {
         @extend %reset-list;
         display: flex;
-        justify-content: flex-end; 
+        justify-content: flex-end;
         align-items: center;
-        
+
         .meniu-item {
             position: relative;
-            
-            > a {
+
+            >a {
                 display: flex;
                 align-items: center;
                 gap: 8px;
@@ -66,6 +74,7 @@ $bp-mobile: 767px;
                 position: relative;
                 text-transform: uppercase;
 
+                /*bara gradient*/
                 &::after {
                     content: '';
                     position: absolute;
@@ -74,32 +83,35 @@ $bp-mobile: 767px;
                     height: 5px;
                     width: 100%;
                     background: linear-gradient(to right, var(--nav-bg) 50%, white 50%);
+
                     background-size: 200% 100%;
-                    background-position: left bottom; 
+                    background-position: left bottom;
                     transition: background-position 0.4s ease;
                 }
 
                 &:hover::after {
-                    background-position: right bottom; 
+                    background-position: right bottom;
                 }
             }
 
             .submeniu {
                 @extend %reset-list;
                 position: absolute;
+
                 top: 100%;
                 left: 0;
-                min-width: 200px;
+                min-width: 100px;
+                width: 100%;
                 display: flex;
                 flex-direction: column;
-                gap: 0;
+                gap: 2px;
                 background-color: var(--subnav-bg);
-                box-shadow: 0px 5px 15px rgba(0,0,0,0.5);
-                
+                box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+
                 transform: scaleY(0);
-                transform-origin: top center; 
+                transform-origin: top center;
                 transition: transform 0.3s ease-in-out;
-                
+
                 li a {
                     display: block;
                     padding: 15px;
@@ -108,7 +120,7 @@ $bp-mobile: 767px;
                     transition: all 0.3s ease;
                     border-bottom: 1px solid #eee;
                     font-weight: bold;
-                    
+
                     &:hover {
                         background-color: var(--subnav-hover-bg);
                         color: var(--subnav-hover-text);
@@ -124,25 +136,32 @@ $bp-mobile: 767px;
 }
 
 @media (max-width: $bp-tablet) and (min-width: ($bp-mobile + 1)) {
-    .meniu-principal .meniu-lista .meniu-item > a {
-        padding: 20px 15px; 
-        .text-meniu { display: none; }
-        i { font-size: 1.5rem; }
+    .meniu-principal .meniu-lista .meniu-item>a {
+        padding: 20px 15px;
+
+        .text-meniu {
+            display: none;
+        }
+
+        /*font aswome*/
+        i {
+            font-size: 1.5rem;
+        }
     }
 }
 
 /* --- ECRAN MIC (Telefoane) --- */
 @media (max-width: $bp-mobile) {
     .meniu-principal {
-        width: auto; 
-        position: static; 
+        width: auto;
+        position: static;
 
         /* --- MODIFICARE BONUS: Containerul și barele hamburger --- */
         .hamburger-label {
             display: block;
             padding: 15px;
             cursor: pointer;
-            
+
             .hamburger-container {
                 display: block !important;
                 position: relative !important;
@@ -156,18 +175,26 @@ $bp-mobile: 767px;
                     width: 100% !important;
                     height: 4px !important;
                     border-radius: 2px !important;
-                    
+
                     /* Forțăm culoarea albă */
                     background-color: var(--nav-text);
-                    
+
                     /* Forțăm animația să ruleze peste orice alt CSS */
                     animation: aparitieBare 0.7s ease-out forwards !important;
                 }
 
                 /* Forțăm pozițiile ca să nu le strice alt fișier */
-                .bara:nth-child(1) { top: 0 !important; }
-                .bara:nth-child(2) { top: 10px !important; }
-                .bara:nth-child(3) { top: 20px !important; }
+                .bara:nth-child(1) {
+                    top: 0 !important;
+                }
+
+                .bara:nth-child(2) {
+                    top: 10px !important;
+                }
+
+                .bara:nth-child(3) {
+                    top: 20px !important;
+                }
 
                 /* Forțăm delay-ul ca să apară pe rând */
                 @for $i from 1 through 3 {
@@ -178,55 +205,69 @@ $bp-mobile: 767px;
             }
         }
 
+        //meniu pt telefon
         .meniu-lista {
+            display: flex;
             flex-direction: column;
-            justify-content: flex-start; 
+            justify-content: flex-start;
             position: absolute;
-            top: 100%; 
+            top: 100%;
+            //acoperire goluri padding
             left: calc(-1 * var(--spatiere-laterala));
-            width: calc(100% + 2 * var(--spatiere-laterala)); 
-            
-            height: auto; 
+            width: calc(100% + 2 * var(--spatiere-laterala));
+
+            height: auto;
             max-height: 0;
             overflow: hidden;
-            background-color: var(--nav-bg); 
+            background-color: var(--nav-bg);
             z-index: 1000;
 
-            display: flex;
+            //ascundere meniu
             visibility: hidden;
-            opacity: 0; 
-            pointer-events: none; 
-            
+            opacity: 0;
+            //dezactivare click
+            pointer-events: none;
+
+            //pozitie originala
             transform: rotate(-90deg);
             transform-origin: top left;
             transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out, visibility 0s linear 0.8s, max-height 0s linear 0.8s;
 
             .meniu-item {
                 width: 100%;
-                
-                > a {
-                    justify-content: center; 
-                    border-bottom: 1px solid #333; 
-                    padding: 25px 20px; 
-                    font-size: 1.3rem; 
+
+                //butoane
+                >a {
+                    justify-content: center;
+                    border-bottom: 1px solid #333;
+                    padding: 25px 20px;
+                    font-size: 1.3rem;
                     transition: background-color 0.3s, color 0.3s;
-                    
-                    &::after { display: none; }
-                    
-                    &:hover { 
-                        background-color: var(--subnav-hover-bg); 
+
+                    //elimin bara gradient
+                    &::after {
+                        display: none;
+                    }
+
+                    &:hover {
+                        background-color: var(--subnav-hover-bg);
                         color: var(--subnav-text);
                     }
                 }
 
+                //home icon
                 &.acasa-item {
                     background-color: #1a1a1a;
-                    > a {
-                        font-size: 1.6rem; 
-                        .text-meniu { display: none; }
-                        
+
+                    >a {
+                        font-size: 1.6rem;
+
+                        .text-meniu {
+                            display: none;
+                        }
+
                         &:hover {
-                            background-color: var(--subnav-hover-bg); 
+                            background-color: var(--subnav-hover-bg);
                             color: var(--subnav-text);
                         }
                     }
@@ -235,53 +276,63 @@ $bp-mobile: 767px;
                 .submeniu {
                     position: static;
                     width: 100%;
-                    display: none;
-                    transform: none; 
+                    display: flex;
+                    flex-direction: column;
+
+                    //ascundere
+                    max-height: 0;
+                    overflow: hidden;
+                    visibility: hidden;
+                    //curata animatii
+                    transform: none;
+
                     background-color: var(--nav-bg);
-                    
+
                     li a {
                         color: var(--nav-text);
                         text-align: center;
                         padding: 15px;
                         font-size: 1.1rem;
                         border-bottom: 1px solid #222;
-                        
+
                         opacity: 0;
                         transform: rotateX(90deg);
                         transform-origin: top;
                         transition: opacity 0.4s ease, transform 0.4s ease;
-                        
+
                         &:hover {
-                            background-color: var(--subnav-hover-bg); 
+                            background-color: var(--subnav-hover-bg);
                             color: var(--subnav-text);
                         }
                     }
                 }
 
+                //aparitie 
                 &:hover .submeniu {
-                    display: flex;
-                    flex-direction: column;
-                    
+                    max-height: 500px;
+                    visibility: visible;
+
                     li a {
                         opacity: 1;
-                        transform: rotateX(0deg); 
+                        transform: rotateX(0deg);
                     }
-                    
+
                     @for $i from 1 through 5 {
                         li:nth-child(#{$i}) a {
-                            transition-delay: $i * 0.1s;
+                            transition-delay: $i * 0.01s;
                         }
                     }
                 }
             }
         }
 
-        .hamburger-checkbox:checked ~ .meniu-lista {
+        .hamburger-checkbox:checked~.meniu-lista {
+            //aparitie
             visibility: visible;
-            opacity: 1; 
-            max-height: 2000px; 
-            pointer-events: auto; 
-            transform: rotate(0deg); 
+            opacity: 1;
+            max-height: 2000px;
+            pointer-events: auto;
+            transform: rotate(0deg);
             transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out, visibility 0s, max-height 0s;
         }
     }

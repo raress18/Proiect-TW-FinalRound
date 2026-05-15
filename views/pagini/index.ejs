@@ -3,6 +3,8 @@
 <head>
     <title>FinalRound - Magazin Echipamente Sporturi de Contact</title>
     <%- include("../fragmente/head.ejs") %>
+    
+    <link rel="stylesheet" href="/resurse/css/galerie_animata.css" type="text/css" />
 </head>
 <body>
     <%- include("../fragmente/header.ejs") %>
@@ -35,8 +37,7 @@
                     Acum ai <em>sansa</em> sa iti completezi arsenalul. Categoriile noastre includ <b>manusi box</b>, <b>manusi mma</b>, <i>tibiere</i>, casti de protectie, accesorii esentiale precum <b>proteza</b> dentara, si imbracaminte de top precum <i>rashguard</i> sau <b>kimonouri</b>. Pentru antrenamente la sol folosim tehnici de <dfn title="Lupta la sol, cu prize si imobilizari">Grappling</dfn>.
                 </p>
                 <p>
-                    Pret promotional pentru sac de box premium: <s>450 RON</s> <ins>299 RON</ins>.
-                    Antrenorul tau ar spune: <q>Echipamentul bun previne accidentarile lungi.</q> (<cite>Ghidul Luptatorului Modern</cite>).
+                    Pret promotional pentru sac de box premium: <s>450 RON</s> <ins>299 RON</ins>. Antrenorul tau ar spune: <q>Echipamentul bun previne accidentarile lungi.</q> (<cite>Ghidul Luptatorului Modern</cite>).
                 </p>
 
                 <figure>
@@ -48,7 +49,7 @@
                     <figcaption>Echipament pentru antrenament la sac</figcaption>
                 </figure>
             </section>
-            
+             
             <hr style="margin-top: 20px;">
         </article>
 
@@ -242,6 +243,28 @@
     </main>
 
     <%- include("../fragmente/galerie.ejs") %>
+
+    <section id="sectiune-galerie-animata" style="margin: 2rem 0;">
+        <h2 class="text-reflexie" data-text="Galerie Animata" style="text-align: center;">Galerie Animata</h2>
+        
+        <% if (locals.imaginiGalerieAnimata && imaginiGalerieAnimata.length > 0) { %>
+            <div class="galerie-animata-container">
+                <% for (let i = 0; i < imaginiGalerieAnimata.length; i++) { %>
+                    <figure>
+                        <img src="<%- imaginiGalerieAnimata[i].cale_web %>" alt="<%- imaginiGalerieAnimata[i].titlu || 'Imagine animata' %>">
+                        <figcaption>
+                            <span style="font-size: 1.1em; font-weight: bold; display: block; margin-bottom: 3px;"><%- imaginiGalerieAnimata[i].titlu || 'Echipament sportiv' %></span>
+                            <% if (imaginiGalerieAnimata[i].text_descriere) { %>
+                                <span style="font-size: 0.85em; font-weight: normal; line-height: 1.2; display: block;"><%- imaginiGalerieAnimata[i].text_descriere %></span>
+                            <% } %>
+                        </figcaption>
+                    </figure>
+                <% } %>
+            </div>
+        <% } else { %>
+            <p style="text-align: center; padding: 2rem;">Nu există imagini disponibile pentru galeria animată.</p>
+        <% } %>
+    </section>
 
     <%- include("../fragmente/footer.ejs") %>
 </body>

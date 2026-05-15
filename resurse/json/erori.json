@@ -1,7 +1,7 @@
 {
   "cale_baza": "resurse/imagini/erori",
   "eroare_default": {
-    "titlu": "Eroare Generică",
+    "titlu": "Eroare Generica",
     "text": "A apărut o eroare neașteptată în sistem. Ne cerem scuze pentru inconvenient.",
     "imagine": "default.png"
   },

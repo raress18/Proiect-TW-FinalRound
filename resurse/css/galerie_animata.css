@@ -1,0 +1,90 @@
+.galerie-animata-container {
+  position: relative;
+  width: 400px;
+  height: 300px;
+  margin: 2rem auto;
+  overflow: hidden;
+  border: 40px solid transparent;
+  border-image: url("/resurse/imagini/border_galerie.jpg") 25% stretch;
+}
+.galerie-animata-container:hover figure {
+  animation-play-state: paused;
+}
+.galerie-animata-container figure {
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
+  z-index: 1;
+  animation: animatie_galerie 35s infinite linear;
+}
+.galerie-animata-container figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.galerie-animata-container figure figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #000;
+  text-align: center;
+  padding: 8px 5px;
+  font-weight: bold;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+@keyframes animatie_galerie {
+  0% {
+    clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
+    z-index: 2;
+  }
+  5%, 14.2757142857% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    z-index: 2;
+  }
+  14.2857142857%, 100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    z-index: 1;
+  }
+}
+.galerie-animata-container figure:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.galerie-animata-container figure:nth-child(2) {
+  animation-delay: 5s;
+}
+
+.galerie-animata-container figure:nth-child(3) {
+  animation-delay: 10s;
+}
+
+.galerie-animata-container figure:nth-child(4) {
+  animation-delay: 15s;
+}
+
+.galerie-animata-container figure:nth-child(5) {
+  animation-delay: 20s;
+}
+
+.galerie-animata-container figure:nth-child(6) {
+  animation-delay: 25s;
+}
+
+.galerie-animata-container figure:nth-child(7) {
+  animation-delay: 30s;
+}
+
+@media screen and (max-width: 991px) {
+  .galerie-animata-container {
+    display: none !important;
+  }
+}

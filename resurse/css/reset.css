@@ -57,7 +57,7 @@ em, i {
 
 /* redefinire liste */
 ul {
-    list-style-type: none; /* ascundem punctele clasice */
+    list-style-type: none; /* ascundem punctele */
     padding-left: var(--reset-spatiere-lista);
 }
 

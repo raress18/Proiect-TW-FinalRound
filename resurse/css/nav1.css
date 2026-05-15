@@ -10,21 +10,25 @@ body {
   --subnav-hover-text: #d20a0a;
 }
 
+/* --- BONUS: Animație cu minim 3 cadre cheie (Culoare, Transformare, Opacitate) --- */
 @keyframes aparitieBare {
   0% {
     opacity: 0;
-    transform: scale(0.2) rotate(-45deg) translateX(-50px);
-    background-color: var(--subnav-hover-text); /* Incepe cu roșu */
+    transform: scale(0.2) rotate(-45deg) translateX(-40px);
+    background-color: var(--subnav-hover-text);
+    /* Începe cu roșu */
   }
   50% {
     opacity: 0.5;
-    transform: scale(1.2) rotate(10deg) translateX(10px);
-    background-color: #888; /* Trece prin gri */
+    transform: scale(1.2) rotate(0deg) translateX(10px);
+    background-color: #888;
+    /* Trece prin gri */
   }
   100% {
     opacity: 1;
     transform: scale(1) rotate(0deg) translateX(0);
-    background-color: var(--nav-text); /* Finalizeaza pe alb */
+    background-color: var(--nav-text);
+    /* Finalizează pe alb */
   }
 }
 .meniu-principal .meniu-lista .meniu-item .submeniu, .meniu-principal .meniu-lista {
@@ -38,7 +42,8 @@ body {
   position: relative;
   z-index: 1000;
 }
-.meniu-principal .hamburger-checkbox, .meniu-principal .hamburger-label {
+.meniu-principal .hamburger-checkbox,
+.meniu-principal .hamburger-label {
   display: none;
 }
 .meniu-principal .meniu-lista {
@@ -59,6 +64,7 @@ body {
   font-weight: bold;
   position: relative;
   text-transform: uppercase;
+  /*bara gradient*/
 }
 .meniu-principal .meniu-lista .meniu-item > a::after {
   content: "";
@@ -79,10 +85,11 @@ body {
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 200px;
+  min-width: 100px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 2px;
   background-color: var(--subnav-bg);
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
   transform: scaleY(0);
@@ -113,6 +120,9 @@ body {
   .meniu-principal .meniu-lista .meniu-item > a .text-meniu {
     display: none;
   }
+  .meniu-principal .meniu-lista .meniu-item > a {
+    /*font aswome*/
+  }
   .meniu-principal .meniu-lista .meniu-item > a i {
     font-size: 1.5rem;
   }
@@ -122,7 +132,7 @@ body {
   .meniu-principal {
     width: auto;
     position: static;
-    /* --- MODIFICARE BONUS: Containerul si barele hamburger --- */
+    /* --- MODIFICARE BONUS: Containerul și barele hamburger --- */
   }
   .meniu-principal .hamburger-label {
     display: block;
@@ -144,11 +154,11 @@ body {
     border-radius: 2px !important;
     /* Forțăm culoarea albă */
     background-color: var(--nav-text);
-    /* Fortam animatia sa ruleze peste orice alt CSS */
+    /* Forțăm animația să ruleze peste orice alt CSS */
     animation: aparitieBare 0.7s ease-out forwards !important;
   }
   .meniu-principal .hamburger-label .hamburger-container {
-    /* Fortam pozitiile ca sa nu le strice alt fisier */
+    /* Forțăm pozițiile ca să nu le strice alt fișier */
   }
   .meniu-principal .hamburger-label .hamburger-container .bara:nth-child(1) {
     top: 0 !important;
@@ -172,6 +182,7 @@ body {
     animation-delay: 900ms !important;
   }
   .meniu-principal .meniu-lista {
+    display: flex;
     flex-direction: column;
     justify-content: flex-start;
     position: absolute;
@@ -183,7 +194,6 @@ body {
     overflow: hidden;
     background-color: var(--nav-bg);
     z-index: 1000;
-    display: flex;
     visibility: hidden;
     opacity: 0;
     pointer-events: none;
@@ -224,7 +234,11 @@ body {
   .meniu-principal .meniu-lista .meniu-item .submeniu {
     position: static;
     width: 100%;
-    display: none;
+    display: flex;
+    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
     transform: none;
     background-color: var(--nav-bg);
   }
@@ -244,27 +258,27 @@ body {
     color: var(--subnav-text);
   }
   .meniu-principal .meniu-lista .meniu-item:hover .submeniu {
-    display: flex;
-    flex-direction: column;
+    max-height: 500px;
+    visibility: visible;
   }
   .meniu-principal .meniu-lista .meniu-item:hover .submeniu li a {
     opacity: 1;
     transform: rotateX(0deg);
   }
   .meniu-principal .meniu-lista .meniu-item:hover .submeniu li:nth-child(1) a {
-    transition-delay: 0.1s;
+    transition-delay: 0.01s;
   }
   .meniu-principal .meniu-lista .meniu-item:hover .submeniu li:nth-child(2) a {
-    transition-delay: 0.2s;
+    transition-delay: 0.02s;
   }
   .meniu-principal .meniu-lista .meniu-item:hover .submeniu li:nth-child(3) a {
-    transition-delay: 0.3s;
+    transition-delay: 0.03s;
   }
   .meniu-principal .meniu-lista .meniu-item:hover .submeniu li:nth-child(4) a {
-    transition-delay: 0.4s;
+    transition-delay: 0.04s;
   }
   .meniu-principal .meniu-lista .meniu-item:hover .submeniu li:nth-child(5) a {
-    transition-delay: 0.5s;
+    transition-delay: 0.05s;
   }
   .meniu-principal .hamburger-checkbox:checked ~ .meniu-lista {
     visibility: visible;

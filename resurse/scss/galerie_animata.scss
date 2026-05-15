@@ -1,0 +1,96 @@
+@use "galerie_variabile" as *;
+
+// Calea către imaginea de border (Asigură-te că fișierul există aici)
+$cale-border: "/resurse/imagini/border_galerie.jpg"; 
+
+$timp-total: $nr-imagini * 5s; 
+$procent-per-imagine: 100% / $nr-imagini;
+$procent-tranzitie: 5%; 
+
+.galerie-animata-container {
+  position: relative;
+  width: 400px;
+  height: 300px;
+  margin: 2rem auto;
+  overflow: hidden;
+  
+  // --- SECRETUL ESTE AICI ---
+  // 1. Trebuie să creezi fizic spațiul pentru ramă (ex: 40px grosime). 
+  // Obligatoriu "solid" și "transparent" ca să se vadă imaginea prin el.
+  border: 40px solid transparent;
+
+  // 2. Abia apoi aplici imaginea. 
+  // Folosim 25% ca să taie corect sferturile imaginii, indiferent de rezoluția JPG-ului tău.
+  border-image: url($cale-border) 25% stretch;
+  
+  // Oprim animatia la hover
+  &:hover figure {
+    animation-play-state: paused;
+  }
+
+  figure {
+    position: absolute;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
+    z-index: 1; 
+    animation: animatie_galerie $timp-total infinite linear;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    figcaption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.85);
+      color: #000;
+      text-align: center;
+      padding: 8px 5px;
+      font-weight: bold;
+      font-family: sans-serif;
+      box-sizing: border-box;
+    }
+  }
+}
+
+// Cadrele de animatie și delay-ul
+@keyframes animatie_galerie {
+  0% { 
+    clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%); 
+    z-index: 2; // Pune imaginea curentă în față
+  }
+  // Se deschide complet și stă în față
+  #{$procent-tranzitie}, #{$procent-per-imagine - 0.01%} { 
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); 
+    z-index: 2; 
+  }
+  // Trece în fundal pentru a lăsa loc următoarei
+  #{$procent-per-imagine}, 100% { 
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); 
+    z-index: 1; 
+  }
+}
+
+// Generarea delay-urilor pentru fiecare imagine în funcție de numărul total
+@for $i from 1 through $nr-imagini {
+  .galerie-animata-container figure:nth-child(#{$i}) {
+    animation-delay: ($i - 1) * ($timp-total / $nr-imagini);
+  }
+}
+
+// Se ascunde pe ecrane mici/medii conform cerinței
+@media screen and (max-width: 991px) {
+  .galerie-animata-container {
+    display: none !important;
+  }
+}

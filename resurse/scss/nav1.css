@@ -14,12 +14,12 @@ body {
 @keyframes aparitieBare {
   0% {
     opacity: 0;
-    transform: scale(0.2) rotate(-45deg) translateX(-50px);
+    transform: scale(0.2) rotate(-45deg) translateX(-40px);
     background-color: var(--subnav-hover-text); /* Începe cu roșu */
   }
   50% {
     opacity: 0.5;
-    transform: scale(1.2) rotate(10deg) translateX(10px);
+    transform: scale(1.2) rotate(0deg) translateX(10px);
     background-color: #888; /* Trece prin gri */
   }
   100% {
@@ -80,10 +80,11 @@ body {
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 200px;
+  min-width: 100px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 2px;
   background-color: var(--subnav-bg);
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
   transform: scaleY(0);
@@ -173,6 +174,7 @@ body {
     animation-delay: 900ms !important;
   }
   .meniu-principal .meniu-lista {
+    display: flex;
     flex-direction: column;
     justify-content: flex-start;
     position: absolute;
@@ -184,7 +186,6 @@ body {
     overflow: hidden;
     background-color: var(--nav-bg);
     z-index: 1000;
-    display: flex;
     visibility: hidden;
     opacity: 0;
     pointer-events: none;
@@ -225,7 +226,11 @@ body {
   .meniu-principal .meniu-lista .meniu-item .submeniu {
     position: static;
     width: 100%;
-    display: none;
+    display: flex;
+    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
     transform: none;
     background-color: var(--nav-bg);
   }
@@ -245,27 +250,27 @@ body {
     color: var(--subnav-text);
   }
   .meniu-principal .meniu-lista .meniu-item:hover .submeniu {
-    display: flex;
-    flex-direction: column;
+    max-height: 500px;
+    visibility: visible;
   }
   .meniu-principal .meniu-lista .meniu-item:hover .submeniu li a {
     opacity: 1;
     transform: rotateX(0deg);
   }
   .meniu-principal .meniu-lista .meniu-item:hover .submeniu li:nth-child(1) a {
-    transition-delay: 0.1s;
+    transition-delay: 0.1;
   }
   .meniu-principal .meniu-lista .meniu-item:hover .submeniu li:nth-child(2) a {
-    transition-delay: 0.2s;
+    transition-delay: 0.2;
   }
   .meniu-principal .meniu-lista .meniu-item:hover .submeniu li:nth-child(3) a {
-    transition-delay: 0.3s;
+    transition-delay: 0.3;
   }
   .meniu-principal .meniu-lista .meniu-item:hover .submeniu li:nth-child(4) a {
-    transition-delay: 0.4s;
+    transition-delay: 0.4;
   }
   .meniu-principal .meniu-lista .meniu-item:hover .submeniu li:nth-child(5) a {
-    transition-delay: 0.5s;
+    transition-delay: 0.5;
   }
   .meniu-principal .hamburger-checkbox:checked ~ .meniu-lista {
     visibility: visible;
