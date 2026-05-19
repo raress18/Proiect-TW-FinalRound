@@ -18,7 +18,7 @@ console.log("Folder index.js (__dirname):", __dirname);
 console.log("Folder curent de lucru (process.cwd()):", process.cwd());
 console.log("Cale fisier (__filename):", __filename);
 
-// --- 1. Crearea automata a folderelor necesare ---
+//  Crearea automata a folderelor necesare 
 const vector_foldere = [
     "temp", "logs", "backup", "fisiere_uploadate",
     obGlobal.folderScss,
@@ -33,15 +33,13 @@ for (let folder of vector_foldere) {
     }
 }
 
-// --- 2. Compilare SASS si Backup ---
+// Compilare SASS si Backup 
 function compileazaScss(caleScss, caleCss) {
     try {
         let drumScss = path.isAbsolute(caleScss) ? caleScss : path.join(obGlobal.folderScss, caleScss);
 
-        // ==========================================
-        // BONUS 4 (0.025): Suport pentru nume de fisiere cu puncte
+        // BONUS 4 : Suport pentru nume de fisiere cu puncte
         // Extragem extensia exacta si o scoatem din nume, pastrand restul fisierului intact
-        // ==========================================
         let extensie = path.extname(drumScss);
         let numeFisierScss = path.basename(drumScss, extensie);
 
@@ -50,12 +48,10 @@ function compileazaScss(caleScss, caleCss) {
             path.join(obGlobal.folderCss, numeFisierScss + '.css');
 
         if (fs.existsSync(drumCss)) {
-            // ==========================================
-            // BONUS 3 (0.05): Nume backup cu format fisier_timestamp.css
-            // ==========================================
+            // BONUS 3  Nume backup cu format fisier_timestamp.css
             let timestamp = new Date().getTime();
             let numeBazaCss = path.basename(drumCss, '.css'); // scoatem extensia .css
-            let numeBackup = `${numeBazaCss}_${timestamp}.css`; // formam noul nume cerut
+            let numeBackup = `${numeBazaCss}_${timestamp}.css`; // formam noul nume
             let caleBackup = path.join(obGlobal.folderBackup, 'resurse', 'css', numeBackup);
 
             try {
@@ -90,9 +86,7 @@ if (fs.existsSync(obGlobal.folderScss)) {
     });
 }
 
-// ==========================================
 // BONUS 5: Verificare date din JSON galerie la pornirea serverului
-// ==========================================
 function verificaDateGalerie() {
     const caleJson = path.join(__dirname, "resurse", "json", "galerie.json");
     if (!fs.existsSync(caleJson)) {
@@ -116,7 +110,7 @@ function verificaDateGalerie() {
 }
 verificaDateGalerie();
 
-// --- 3. Generare Galerie Statica ---
+//  Generare Galerie Statica 
 function initGalerie() {
     const caleJson = path.join(__dirname, "resurse", "json", "galerie.json");
     if (!fs.existsSync(caleJson)) return [];
@@ -165,7 +159,7 @@ function initGalerie() {
     return imaginiFiltrate;
 }
 
-// --- Generare Galerie Animată ---
+//  Generare Galerie Animata 
 function initGalerieAnimata() {
     const puteri = [2, 4, 8, 16];
     const nrImaginiAleator = puteri[Math.floor(Math.random() * puteri.length)];
@@ -204,7 +198,7 @@ function initGalerieAnimata() {
 }
 
 
-// --- 4. Setari Express & Erori ---
+// Setari Express & Erori 
 app.use("/resurse", express.static(path.join(__dirname, "resurse")));
 
 function initErori() {
@@ -309,7 +303,7 @@ function afisareEroare(res, identificator, titlu, text, imagine) {
     });
 }
 
-// --- RUTE ---
+// RUTE 
 app.get("/favicon.ico", function (req, res) {
     res.sendFile(path.join(__dirname, "resurse/ico/favicon.ico"));
 });

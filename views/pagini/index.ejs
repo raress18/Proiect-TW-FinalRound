@@ -244,20 +244,13 @@
 
     <%- include("../fragmente/galerie.ejs") %>
 
-    <section id="sectiune-galerie-animata" style="margin: 2rem 0;">
-        <h2 class="text-reflexie" data-text="Galerie Animata" style="text-align: center;">Galerie Animata</h2>
-        
+    <section id="sectiune-galerie-animata" style="margin: 2rem 0; display: flex; justify-content: center;">
         <% if (locals.imaginiGalerieAnimata && imaginiGalerieAnimata.length > 0) { %>
             <div class="galerie-animata-container">
                 <% for (let i = 0; i < imaginiGalerieAnimata.length; i++) { %>
                     <figure>
                         <img src="<%- imaginiGalerieAnimata[i].cale_web %>" alt="<%- imaginiGalerieAnimata[i].titlu || 'Imagine animata' %>">
-                        <figcaption>
-                            <span style="font-size: 1.1em; font-weight: bold; display: block; margin-bottom: 3px;"><%- imaginiGalerieAnimata[i].titlu || 'Echipament sportiv' %></span>
-                            <% if (imaginiGalerieAnimata[i].text_descriere) { %>
-                                <span style="font-size: 0.85em; font-weight: normal; line-height: 1.2; display: block;"><%- imaginiGalerieAnimata[i].text_descriere %></span>
-                            <% } %>
-                        </figcaption>
+                        <figcaption><%- imaginiGalerieAnimata[i].titlu || 'Echipament sportiv' %></figcaption>
                     </figure>
                 <% } %>
             </div>

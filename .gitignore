@@ -4,6 +4,7 @@ temp/
 logs/
 backup/
 fisiere_uploadate/
+cerinta.txt
 
 npm-debug.log*
 .DS_Store

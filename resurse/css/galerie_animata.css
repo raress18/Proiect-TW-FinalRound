@@ -2,10 +2,14 @@
   position: relative;
   width: 400px;
   height: 300px;
-  margin: 2rem auto;
+  margin: 3rem auto;
+  /* mai mult spatiu pentru o asezare mai buna */
   overflow: hidden;
-  border: 40px solid transparent;
-  border-image: url("/resurse/imagini/border_galerie.jpg") 25% stretch;
+  border: 15px solid transparent;
+  border-image: linear-gradient(45deg, #a70000, #ff3b3b, #a70000, #ff3b3b) 1;
+  border-radius: 15px;
+  clip-path: inset(0 round 15px);
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5));
 }
 .galerie-animata-container:hover figure {
   animation-play-state: paused;
@@ -19,7 +23,7 @@
   height: 100%;
   clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
   z-index: 1;
-  animation: animatie_galerie 35s infinite linear;
+  animation: animatie_galerie 16s infinite linear;
 }
 .galerie-animata-container figure img {
   width: 100%;
@@ -32,27 +36,31 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(220, 220, 220, 0.9);
   color: #000;
   text-align: center;
-  padding: 8px 5px;
-  font-weight: bold;
-  font-family: sans-serif;
+  padding: 4px 5px;
+  font-size: 1rem;
+  font-family: serif;
   box-sizing: border-box;
+  border-top: 1px solid #999;
 }
 
 @keyframes animatie_galerie {
   0% {
     clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
     z-index: 2;
+    filter: grayscale(90%) sepia(20%) brightness(0.8);
   }
-  5%, 14.2757142857% {
+  16.25%, 24.99% {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     z-index: 2;
+    filter: grayscale(90%) sepia(0%) brightness(1);
   }
-  14.2857142857%, 100% {
+  25%, 100% {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     z-index: 1;
+    filter: grayscale(90%) sepia(20%) brightness(0.8);
   }
 }
 .galerie-animata-container figure:nth-child(1) {
@@ -60,27 +68,15 @@
 }
 
 .galerie-animata-container figure:nth-child(2) {
-  animation-delay: 5s;
+  animation-delay: 4s;
 }
 
 .galerie-animata-container figure:nth-child(3) {
-  animation-delay: 10s;
+  animation-delay: 8s;
 }
 
 .galerie-animata-container figure:nth-child(4) {
-  animation-delay: 15s;
-}
-
-.galerie-animata-container figure:nth-child(5) {
-  animation-delay: 20s;
-}
-
-.galerie-animata-container figure:nth-child(6) {
-  animation-delay: 25s;
-}
-
-.galerie-animata-container figure:nth-child(7) {
-  animation-delay: 30s;
+  animation-delay: 12s;
 }
 
 @media screen and (max-width: 991px) {

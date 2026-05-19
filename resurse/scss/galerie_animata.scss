@@ -1,28 +1,34 @@
 @use "galerie_variabile" as *;
 
 // Calea către imaginea de border (Asigură-te că fișierul există aici)
-$cale-border: "/resurse/imagini/border_galerie.jpg"; 
+$cale-border: "/resurse/imagini/border_galerie.jpg";
 
-$timp-total: $nr-imagini * 5s; 
+$timp-total: $nr-imagini * 4s; // Sta mai putin pe ecran în total
 $procent-per-imagine: 100% / $nr-imagini;
-$procent-tranzitie: 5%; 
+$procent-tranzitie: $procent-per-imagine * 0.65; // Tranzitie mult mai lenta (65% din timpul ei) 
 
 .galerie-animata-container {
   position: relative;
   width: 400px;
   height: 300px;
-  margin: 2rem auto;
+  margin: 3rem auto;
+  /* mai mult spatiu pentru o asezare mai buna */
   overflow: hidden;
-  
+
   // --- SECRETUL ESTE AICI ---
   // 1. Trebuie să creezi fizic spațiul pentru ramă (ex: 40px grosime). 
   // Obligatoriu "solid" și "transparent" ca să se vadă imaginea prin el.
-  border: 40px solid transparent;
+  border: 15px solid transparent; // rama putin mai subtire arata mai elegant
 
   // 2. Abia apoi aplici imaginea. 
-  // Folosim 25% ca să taie corect sferturile imaginii, indiferent de rezoluția JPG-ului tău.
-  border-image: url($cale-border) 25% stretch;
-  
+  // Border roșu cu colțuri rotunjite folosind un truc cu clip-path
+  border-image: linear-gradient(45deg, #a70000, #ff3b3b, #a70000, #ff3b3b) 1;
+  border-radius: 15px; // Rotunjirea în sine
+  clip-path: inset(0 round 15px); // Obligatoriu ca să rotunjească și border-image-ul
+
+  // Pentru umbră, folosim drop-shadow deoarece box-shadow ar fi tăiat de clip-path
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5));
+
   // Oprim animatia la hover
   &:hover figure {
     animation-play-state: paused;
@@ -35,9 +41,9 @@ $procent-tranzitie: 5%;
     left: 0;
     width: 100%;
     height: 100%;
-    
+
     clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
-    z-index: 1; 
+    z-index: 1;
     animation: animatie_galerie $timp-total infinite linear;
 
     img {
@@ -52,32 +58,40 @@ $procent-tranzitie: 5%;
       bottom: 0;
       left: 0;
       width: 100%;
-      background-color: rgba(255, 255, 255, 0.85);
+      background-color: rgba(220, 220, 220, 0.9);
       color: #000;
       text-align: center;
-      padding: 8px 5px;
-      font-weight: bold;
-      font-family: sans-serif;
+      padding: 4px 5px;
+      font-size: 1rem;
+      font-family: serif;
       box-sizing: border-box;
+      border-top: 1px solid #999;
     }
   }
 }
 
 // Cadrele de animatie și delay-ul
 @keyframes animatie_galerie {
-  0% { 
-    clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%); 
+  0% {
+    clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
     z-index: 2; // Pune imaginea curentă în față
+    filter: grayscale(90%) sepia(20%) brightness(0.8); // Usor decolorata la inceput
   }
-  // Se deschide complet și stă în față
-  #{$procent-tranzitie}, #{$procent-per-imagine - 0.01%} { 
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); 
-    z-index: 2; 
+
+  // Se deschide complet și stă în față (prinde culoare treptat)
+  #{$procent-tranzitie},
+  #{$procent-per-imagine - 0.01%} {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    z-index: 2;
+    filter: grayscale(90%) sepia(0%) brightness(1); // Culoare completa
   }
+
   // Trece în fundal pentru a lăsa loc următoarei
-  #{$procent-per-imagine}, 100% { 
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); 
-    z-index: 1; 
+  #{$procent-per-imagine},
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    z-index: 1;
+    filter: grayscale(90%) sepia(20%) brightness(0.8); // Se decoloreaza la loc ca sa o evidentieze pe cea noua
   }
 }
 
