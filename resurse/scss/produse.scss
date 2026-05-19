@@ -1,0 +1,457 @@
+/* CSS Inspirat din Knock-out.ro / Armura.ro si preferintele utilizatorului */
+@use "galerie_variabile" as *;
+
+:root {
+    --box-border-color: #e5e7eb;
+    --box-shadow-hover: 0px 8px 24px rgba(0,0,0,0.12);
+    --knockout-red: #e63946;
+    --knockout-dark: #1f2937;
+    --knockout-gray: #f3f4f6;
+    
+    // Variabile din cerinta userului
+    --culoare-tab-orar: #0b5944; 
+    --culoare-accent: #81DB87;
+    --culoare-primara: #81DBC4;
+}
+
+.body-produse {
+    font-family: 'Inter', sans-serif;
+    background-color: #f9fafb;
+    color: #374151;
+}
+
+.titlu-sectiune-produse {
+    text-align: center;
+    margin-bottom: 3rem;
+    
+    h2 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 2.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--knockout-dark);
+        margin-bottom: 0.5rem;
+    }
+    
+    p {
+        font-size: 1.1rem;
+        color: #6b7280;
+    }
+}
+
+/* FILTRE */
+details#filtre {
+    background: #ffffff;
+    border: 1px solid var(--box-border-color);
+    border-radius: 12px;
+    padding: 1rem 1.5rem; /* Padding mai mic pt a ocupa mai putin loc */
+    margin-bottom: 3rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    width: 100%;
+    box-sizing: border-box;
+
+    summary.header-filtre {
+        margin-bottom: 0;
+        padding-bottom: 0.5rem;
+        cursor: pointer;
+        list-style: none; /* Ascundem sageata default */
+        display: flex;
+        justify-content: center;
+        
+        &::-webkit-details-marker {
+            display: none;
+        }
+        
+        h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            color: var(--knockout-dark);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.2s;
+            
+            &:hover {
+                color: var(--knockout-red);
+            }
+        }
+    }
+    
+    /* Cand este deschis, adaugam margini */
+    &[open] summary.header-filtre {
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid var(--knockout-gray);
+        padding-bottom: 1rem;
+    }
+
+    .filtre-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Mai compacte */
+        gap: 1rem; /* Spatiu mai mic intre filtre */
+        margin-bottom: 1.5rem;
+
+        .filtru {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                font-weight: 600;
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+                color: var(--knockout-dark);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            input[type="text"], select, textarea, input[list] {
+                width: 100%;
+                padding: 0.5rem 0.75rem; /* Mai mic */
+                border: 1px solid #d1d5db;
+                border-radius: 6px;
+                font-family: 'Inter', sans-serif;
+                font-size: 0.9rem; /* Mai mic */
+                background-color: #fcfcfc;
+                transition: border-color 0.2s, box-shadow 0.2s;
+
+                &:focus {
+                    outline: none;
+                    border-color: var(--knockout-red);
+                    box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1);
+                }
+            }
+
+            .badge-rosu {
+                background: var(--knockout-red);
+                color: white;
+                padding: 2px 8px;
+                border-radius: 12px;
+                font-size: 0.8rem;
+            }
+
+            .range-wrapper {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                
+                span {
+                    font-size: 0.85rem;
+                    color: #6b7280;
+                    font-weight: 600;
+                }
+                
+                input[type="range"] {
+                    flex: 1;
+                    accent-color: var(--knockout-red);
+                }
+            }
+
+            /* Custom Radio & Checkbox styling for that aesthetic look */
+            .radio-grup, .check-grup {
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+
+                label {
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    background: var(--knockout-gray);
+                    padding: 0.5rem 1rem;
+                    border-radius: 20px;
+                    border: 1px solid transparent;
+                    transition: all 0.2s;
+                    margin: 0;
+
+                    &:hover {
+                        background: #e5e7eb;
+                    }
+
+                    input {
+                        margin-right: 8px;
+                        accent-color: var(--knockout-red);
+                    }
+                }
+            }
+        }
+    }
+
+    .butoane-filtre {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--box-border-color);
+
+        .btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+
+            &.btn-action {
+                background-color: var(--knockout-red);
+                color: white;
+                &:hover { background-color: #c1121f; transform: translateY(-2px); }
+            }
+
+            &.btn-dark {
+                background-color: var(--knockout-dark);
+                color: white;
+                &:hover { background-color: #111827; transform: translateY(-2px); }
+            }
+
+            &.btn-accent {
+                background-color: var(--culoare-tab-orar);
+                color: white;
+                &:hover { filter: brightness(1.2); transform: translateY(-2px); }
+            }
+
+            &.btn-outline {
+                background-color: transparent;
+                border: 2px solid #d1d5db;
+                color: #4b5563;
+                &:hover { background-color: #f3f4f6; color: var(--knockout-dark); }
+            }
+        }
+    }
+}
+
+/* GRILA PRODUSE */
+.grid-produse {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    gap: 2rem;
+
+    .fara-produse {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 4rem;
+        background: white;
+        border-radius: 12px;
+        color: #9ca3af;
+        
+        i { font-size: 4rem; margin-bottom: 1rem; }
+        p { font-size: 1.2rem; font-weight: 500; }
+    }
+
+    .produs {
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        border: 1px solid var(--box-border-color);
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--box-shadow-hover);
+            border-color: #d1d5db;
+        }
+
+        .produs-header {
+            background-color: var(--knockout-dark);
+            padding: 1rem;
+            text-align: center;
+            
+            h3 {
+                margin: 0;
+                font-family: 'Oswald', sans-serif;
+                font-size: 1.3rem;
+                letter-spacing: 0.5px;
+                
+                a {
+                    color: #ffffff !important;
+                    text-decoration: none !important;
+                    text-shadow: none !important; /* PREVENIM GLOW ROSU */
+                    background: transparent !important;
+                    box-shadow: none !important;
+                    transition: color 0.2s;
+                    
+                    &:hover { 
+                        color: var(--knockout-red) !important; 
+                        text-shadow: none !important;
+                        background: transparent !important;
+                        box-shadow: none !important;
+                    }
+                }
+            }
+        }
+
+        .info-container {
+            display: flex;
+            align-items: center; /* Centram pe verticala */
+            padding: 1rem;
+            gap: 1rem;
+
+            .tabel-info {
+                flex: 1 1 45%; /* Tabelul ocupa mai putin spatiu */
+                
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    font-size: 0.8rem; /* Font mai mic pt a nu distrage atentia */
+
+                    th {
+                        background-color: transparent;
+                        color: #9ca3af;
+                        padding: 6px 4px;
+                        border-bottom: 1px solid var(--box-border-color);
+                        text-align: left;
+                        width: 45%;
+                        font-weight: 500;
+                        font-size: 0.75rem;
+                        text-transform: uppercase;
+                    }
+                    
+                    tr, tbody {
+                        box-shadow: none !important;
+                        background: transparent !important;
+                    }
+                    
+                    tr:hover, tr:hover td, tr:hover th {
+                        box-shadow: none !important;
+                        background: transparent !important;
+                    }
+
+                    td {
+                        padding: 6px 4px;
+                        border: none !important;
+                        border-bottom: 1px solid var(--box-border-color) !important;
+                        color: var(--knockout-dark) !important;
+                        background: transparent !important;
+                        text-align: right;
+                        box-shadow: none !important; 
+                        text-shadow: none !important;
+                        filter: none !important;
+                        outline: none !important;
+                        font-weight: 600;
+                        
+                        &.pret-bold {
+                            font-weight: 800;
+                            color: var(--knockout-red) !important;
+                            font-size: 1.4rem; /* PRET FOARTE MARE */
+                            display: block;
+                            text-align: left;
+                        }
+                        
+                        .badge-aprobat {
+                            background: #10b981;
+                            color: white;
+                            padding: 2px 6px;
+                            border-radius: 4px;
+                            font-size: 0.7rem;
+                            font-weight: bold;
+                            box-shadow: none !important;
+                        }
+                        .badge-respins {
+                            background: #ef4444;
+                            color: white;
+                            padding: 2px 6px;
+                            border-radius: 4px;
+                            font-size: 0.7rem;
+                            font-weight: bold;
+                            box-shadow: none !important;
+                        }
+                    }
+                }
+            }
+
+            .imagine-produs {
+                flex: 1 1 55%; /* IMAGINEA OCUPA MAJORITATEA SPATIULUI */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: transparent;
+                
+                figure {
+                    margin: 0;
+                    width: 100%;
+                    height: 220px; /* Inalta cat trebuie */
+                    padding: 0;
+                    border: none;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    
+                    img {
+                        max-width: 100%;
+                        max-height: 100%;
+                        object-fit: contain;
+                        filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+                        transition: transform 0.3s ease;
+                        
+                        &:hover {
+                            transform: scale(1.08);
+                        }
+                    }
+                }
+            }
+        }
+
+        .descriere-produs {
+            padding: 0 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            color: #6b7280;
+            font-style: italic;
+            flex-grow: 1; /* Pushes the footer down */
+        }
+
+        .produs-footer-meta {
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--knockout-gray);
+            background: #fcfcfc;
+            
+            .categorie-tag {
+                background: var(--knockout-gray);
+                color: var(--knockout-dark);
+                padding: 4px 10px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            
+            .data-tag {
+                font-size: 0.8rem;
+                color: #9ca3af;
+                font-weight: 500;
+            }
+        }
+
+        .btn-vezi-produs {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            text-align: center;
+            background-color: var(--knockout-red);
+            color: white;
+            text-decoration: none;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            transition: background-color 0.2s;
+            
+            &:hover {
+                background-color: #c1121f;
+            }
+        }
+    }
+}

@@ -3,6 +3,16 @@ const fs = require("fs");
 const path = require("path");
 const sass = require("sass");
 const sharp = require("sharp");
+const { Pool } = require("pg");
+
+// Setup Baza de date
+const db = new Pool({
+    user: 'postgres',
+    host: 'localhost',
+    database: 'postgres',
+    password: 'rarespa55',
+    port: 5432,
+});
 
 const app = express();
 app.set("view engine", "ejs");
@@ -317,6 +327,52 @@ app.get(["/", "/index", "/home"], function (req, res) {
         imaginiGalerie: dateGalerie,
         imaginiGalerieAnimata: imaginiGalerieAnimata
     });
+});
+
+// Extragere categorii din BD si salvare in app.locals
+app.use(async (req, res, next) => {
+    if (!app.locals.categorii) {
+        try {
+            const rez = await db.query("SELECT unnest(enum_range(NULL::categorie_echipament)) AS categorie");
+            app.locals.categorii = rez.rows.map(row => row.categorie);
+        } catch (err) {
+            console.error("Eroare la preluarea categoriilor:", err);
+            app.locals.categorii = [];
+        }
+    }
+    next();
+});
+
+app.get("/produse", async function (req, res) {
+    let tipCategorie = req.query.tip;
+    let query = "SELECT * FROM produse";
+    let valori = [];
+    if (tipCategorie && tipCategorie !== "toate") {
+        query += " WHERE categorie = $1";
+        valori.push(tipCategorie);
+    }
+
+    try {
+        const rez = await db.query(query, valori);
+        res.render("pagini/produse", { produse: rez.rows, categorie: tipCategorie || "toate" });
+    } catch (err) {
+        console.error("Eroare incarcare produse:", err);
+        afisareEroare(res, 500);
+    }
+});
+
+app.get("/produs/:id", async function (req, res) {
+    try {
+        const rez = await db.query("SELECT * FROM produse WHERE id = $1", [req.params.id]);
+        if (rez.rows.length === 0) {
+            afisareEroare(res, 404, "Produs inexistent", "Produsul nu a fost gasit in baza de date.");
+            return;
+        }
+        res.render("pagini/produs", { produs: rez.rows[0] });
+    } catch (err) {
+        console.error("Eroare produs:", err);
+        afisareEroare(res, 500);
+    }
 });
 
 app.get("/*pagina", function (req, res) {

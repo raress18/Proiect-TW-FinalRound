@@ -166,7 +166,16 @@ main {
     }
 }
 
-/* header si footer  */
+header,
+header *:not(i):not([class^="fa-"]):not([class*=" fa-"]) {
+    font-family: 'Times New Roman', Times, serif !important;
+}
+
+footer,
+footer *:not(i):not([class^="fa-"]):not([class*=" fa-"]) {
+    font-family: 'Times New Roman', Times, serif !important;
+}
+
 header,
 footer {
     background-color: var(--culoare-secundara);

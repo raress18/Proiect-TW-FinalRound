@@ -31,11 +31,14 @@
             </li>
             
             <li class="meniu-item cu-submeniu">
-                <a href="/produse"><i class="fa-solid fa-box-open"></i> <span class="text-meniu">Categorii</span></a>
+                <a href="/produse"><i class="fa-solid fa-box-open"></i> <span class="text-meniu">Produse</span></a>
                 <ul class="submeniu">
-                    <li><a href="/produse#manusi">Mănuși Box/MMA</a></li>
-                    <li><a href="/produse#tibiere">Tibiere & Protecții</a></li>
-                    <li><a href="/produse#haine">Îmbrăcăminte</a></li>
+                    <li><a href="/produse?tip=toate">Toate</a></li>
+                    <% if (locals.categorii && locals.categorii.length > 0) { %>
+                        <% for (let cat of locals.categorii) { %>
+                            <li><a href="/produse?tip=<%- cat %>"><%- cat.charAt(0).toUpperCase() + cat.slice(1) %></a></li>
+                        <% } %>
+                    <% } %>
                 </ul>
             </li>
             

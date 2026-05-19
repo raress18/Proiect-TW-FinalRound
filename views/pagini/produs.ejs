@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <title><%- produs.nume %> - FinalRound</title>
+    <%- include("../fragmente/head.ejs") %>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .body-produs {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff; /* Fundal curat alb ca la Venum */
+            color: #111111;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container-produs-unic {
+            max-width: 1400px; /* Foarte lat */
+            margin: 2rem auto;
+            display: flex;
+            gap: 4rem;
+            padding: 0 2rem;
+            align-items: flex-start;
+        }
+
+        /* COLOANA STANGA: IMAGINEA */
+        .coloana-imagini {
+            flex: 1 1 60%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .imagine-principala {
+            width: 100%;
+            background-color: #f0f0f0; /* Gri-ul fin din spate la Venum */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .imagine-principala img {
+            max-width: 100%;
+            height: auto;
+            max-height: 700px;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.25)); /* O umbra superba 3D */
+            transition: transform 0.4s ease;
+            margin-top: 3rem; /* Impinge poza in jos ca sa nu mai incalece sus */
+        }
+
+        .imagine-principala img:hover {
+            transform: scale(1.03);
+        }
+
+        /* COLOANA DREAPTA: DETALII */
+        .coloana-detalii {
+            flex: 1 1 40%;
+            padding-top: 1rem;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .titlu-produs {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin: 0 0 0.8rem 0; /* Mai mult spatiu sub titlu */
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        .subtitlu-produs {
+            font-size: 1.2rem;
+            color: #666666;
+            margin: 0 0 2rem 0; /* Mai mult spatiu sub subtitlu */
+            font-weight: 400;
+        }
+
+        .pret-produs {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin: 0 0 1rem 0;
+        }
+
+        .promo-text {
+            font-size: 0.85rem;
+            color: #111;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .promo-badge {
+            background-color: #111;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+
+        /* TABEL MINIMALIST VENUM STYLE */
+        .tabel-detalii {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            box-shadow: none !important;
+            background: transparent !important;
+            border: none !important;
+        }
+
+        /* ANULAM ABSOLUT ORICE GLOW, UMBRA SAU BACKGROUND EXTERN */
+        .tabel-detalii tbody,
+        .tabel-detalii tr,
+        .tabel-detalii th, 
+        .tabel-detalii td {
+            box-shadow: none !important;
+            text-shadow: none !important;
+            background-image: none !important;
+            background-color: transparent !important;
+            filter: none !important;
+            outline: none !important;
+        }
+
+        .tabel-detalii th, .tabel-detalii td {
+            padding: 12px 0;
+            text-align: left;
+            border: none !important;
+            border-bottom: 1px solid #eeeeee !important;
+            font-size: 0.95rem;
+        }
+
+        .tabel-detalii tr:hover,
+        .tabel-detalii tr:hover th, 
+        .tabel-detalii tr:hover td {
+            box-shadow: none !important;
+            background-color: transparent !important;
+        }
+
+        .tabel-detalii th {
+            color: #111 !important;
+            font-weight: 600;
+            width: 40%;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .tabel-detalii td {
+            color: #555 !important;
+            font-weight: 500;
+        }
+
+        /* BUTOANE A-LA VENUM */
+        .zona-butoane {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+        }
+
+        .btn-adauga {
+            flex: 1;
+            background-color: #111;
+            color: white;
+            border: none;
+            padding: 1.2rem;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            /* Efect usor tesit ca la Venum */
+            clip-path: polygon(0 0, 100% 0, 96% 100%, 0% 100%);
+        }
+
+        .btn-adauga:hover {
+            background-color: #333;
+        }
+
+        .btn-fav {
+            background-color: transparent;
+            border: 1px solid #111;
+            width: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .btn-fav:hover {
+            background-color: #f5f5f5;
+        }
+
+        .descriere-produs {
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.6;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+
+        .descriere-produs h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .container-produs-unic {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .coloana-detalii {
+                position: static;
+            }
+            .imagine-principala {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="body-produs">
+    <%- include("../fragmente/header.ejs") %>
+
+    <main style="display: block !important;">
+        <div class="container-produs-unic">
+            
+            <!-- COLOANA STANGA: IMAGINE MASIVA -->
+            <div class="coloana-imagini">
+                <div class="imagine-principala">
+                    <img src="/resurse/imagini/<%- produs.imagine %>" alt="<%- produs.nume %>" onerror="this.src='/resurse/imagini/echipament_mare.jpg'">
+                </div>
+                <!-- Daca am fi avut mai multe poze, veneau aici dedesubt exact ca pe Venum -->
+            </div>
+
+            <!-- COLOANA DREAPTA: DETALII MINIMALISTE -->
+            <div class="coloana-detalii">
+                <h2 class="titlu-produs"><%- produs.nume %></h2>
+                <h3 class="subtitlu-produs"><%- produs.categorie %> - <%- produs.tip_sport %></h3>
+                
+                <div class="pret-produs"><%- produs.pret %> RON</div>
+                
+                <!-- TABEL CARACTERISTICI (Obligatoriu prin cerinta) -->
+                <table class="tabel-detalii">
+                    <tr>
+                        <th>Greutate</th>
+                        <td><%- produs.greutate %> g</td>
+                    </tr>
+                    <tr>
+                        <th>Culoare</th>
+                        <td>
+                            <!-- Un mic artificiu vizual pentru culoare -->
+                            <% 
+                                let hexC = '#000';
+                                if (produs.culoare === 'Alb') hexC = '#fff';
+                                else if (produs.culoare === 'Rosu') hexC = '#e63946';
+                                else if (produs.culoare === 'Albastru') hexC = '#1d4ed8';
+                                else if (produs.culoare !== 'Negru') hexC = '#eab308';
+                                let styleStr = "display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: " + hexC + "; border: 1px solid #ccc; margin-right: 6px; vertical-align: middle;";
+                            %>
+                            <%- '<span style="' + styleStr + '"></span>' %>
+                            <%- produs.culoare %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Materiale</th>
+                        <td><%- produs.materiale %></td>
+                    </tr>
+                    <tr>
+                        <th>Aprobat competiție</th>
+                        <td>
+                            <%- produs.aprobat_competitie ? 'Da' : 'Nu' %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Data Adăugării</th>
+                        <td>
+                            <% 
+                                const d = new Date(produs.data_adaugare);
+                                const luni = ["Ian", "Feb", "Mar", "Apr", "Mai", "Iun", "Iul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                            %>
+                            <%- d.getDate() %> <%- luni[d.getMonth()] %> <%- d.getFullYear() %>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- BUTOANE -->
+                <div class="zona-butoane">
+                    <button class="btn-adauga">Add to cart <i class="fa-solid fa-plus"></i></button>
+                    <button class="btn-fav"><i class="fa-regular fa-heart"></i></button>
+                </div>
+
+                <div class="descriere-produs">
+                    <h3>Descriere Produs</h3>
+                    <p><%- produs.descriere %></p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <%- include("../fragmente/footer.ejs") %>
+</body>
+</html>
