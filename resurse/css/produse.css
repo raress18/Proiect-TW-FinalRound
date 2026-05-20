@@ -1,7 +1,7 @@
 /* CSS Inspirat din Knock-out.ro / Armura.ro si preferintele utilizatorului */
 :root {
   --box-border-color: #e5e7eb;
-  --box-shadow-hover: 0px 8px 24px rgba(0,0,0,0.12);
+  --box-shadow-hover: 0px 8px 24px rgba(0, 0, 0, 0.12);
   --knockout-red: #e63946;
   --knockout-dark: #1f2937;
   --knockout-gray: #f3f4f6;
@@ -14,6 +14,65 @@
   font-family: "Inter", sans-serif;
   background-color: #f9fafb;
   color: #374151;
+}
+
+/* Dark mode pentru pagina de produse */
+[data-bs-theme=dark] {
+  --box-border-color: #3a3a3a;
+  --box-shadow-hover: 0px 8px 24px rgba(0, 0, 0, 0.5);
+  --knockout-dark: #e0e0e0;
+  --knockout-gray: #333333;
+}
+
+[data-bs-theme=dark] .body-produse {
+  background-color: var(--culoare-fundal-pagina, #1b1b1b);
+  color: #e0e0e0;
+}
+
+[data-bs-theme=dark] details#filtre {
+  background: var(--culoare-fundal-zone, #2a2a2a);
+  border-color: var(--box-border-color);
+}
+
+[data-bs-theme=dark] .produs {
+  background-color: var(--culoare-fundal-zone, #2a2a2a) !important;
+  border-color: var(--box-border-color) !important;
+}
+
+[data-bs-theme=dark] .produs .produs-header {
+  background-color: #1a1a1a;
+}
+
+[data-bs-theme=dark] .produs .tabel-info th {
+  color: #9ca3af;
+}
+
+[data-bs-theme=dark] .produs .tabel-info td {
+  color: #e0e0e0 !important;
+}
+
+[data-bs-theme=dark] .produs .tabel-info td,
+[data-bs-theme=dark] .produs .tabel-info th {
+  border-bottom-color: var(--box-border-color) !important;
+}
+
+[data-bs-theme=dark] .produs .descriere-produs {
+  color: #9ca3af;
+}
+
+[data-bs-theme=dark] .produs .produs-footer-meta {
+  background: #1a1a1a;
+  border-top-color: var(--box-border-color);
+}
+
+[data-bs-theme=dark] .produs .produs-footer-meta .categorie-tag {
+  background: #333333;
+  color: #e0e0e0;
+}
+
+[data-bs-theme=dark] .fara-produse {
+  background: var(--culoare-fundal-zone, #2a2a2a);
+  color: #9ca3af;
 }
 
 .titlu-sectiune-produse {
@@ -38,7 +97,8 @@ details#filtre {
   background: #ffffff;
   border: 1px solid var(--box-border-color);
   border-radius: 12px;
-  padding: 1rem 1.5rem; /* Padding mai mic pt a ocupa mai putin loc */
+  padding: 1rem 1.5rem;
+  /* Padding mai mic pt a ocupa mai putin loc */
   margin-bottom: 3rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
   width: 100%;
@@ -48,7 +108,8 @@ details#filtre summary.header-filtre {
   margin-bottom: 0;
   padding-bottom: 0.5rem;
   cursor: pointer;
-  list-style: none; /* Ascundem sageata default */
+  list-style: none;
+  /* Ascundem sageata default */
   display: flex;
   justify-content: center;
 }
@@ -78,8 +139,10 @@ details#filtre[open] summary.header-filtre {
 }
 details#filtre .filtre-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Mai compacte */
-  gap: 1rem; /* Spatiu mai mic intre filtre */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  /* Mai compacte */
+  gap: 1rem;
+  /* Spatiu mai mic intre filtre */
   margin-bottom: 1.5rem;
 }
 details#filtre .filtre-container .filtru {
@@ -95,17 +158,25 @@ details#filtre .filtre-container .filtru label {
   align-items: center;
   gap: 8px;
 }
-details#filtre .filtre-container .filtru input[type=text], details#filtre .filtre-container .filtru select, details#filtre .filtre-container .filtru textarea, details#filtre .filtre-container .filtru input[list] {
+details#filtre .filtre-container .filtru input[type=text],
+details#filtre .filtre-container .filtru select,
+details#filtre .filtre-container .filtru textarea,
+details#filtre .filtre-container .filtru input[list] {
   width: 100%;
-  padding: 0.5rem 0.75rem; /* Mai mic */
+  padding: 0.5rem 0.75rem;
+  /* Mai mic */
   border: 1px solid #d1d5db;
   border-radius: 6px;
   font-family: "Inter", sans-serif;
-  font-size: 0.9rem; /* Mai mic */
+  font-size: 0.9rem;
+  /* Mai mic */
   background-color: #fcfcfc;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-details#filtre .filtre-container .filtru input[type=text]:focus, details#filtre .filtre-container .filtru select:focus, details#filtre .filtre-container .filtru textarea:focus, details#filtre .filtre-container .filtru input[list]:focus {
+details#filtre .filtre-container .filtru input[type=text]:focus,
+details#filtre .filtre-container .filtru select:focus,
+details#filtre .filtre-container .filtru textarea:focus,
+details#filtre .filtre-container .filtru input[list]:focus {
   outline: none;
   border-color: var(--knockout-red);
   box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1);
@@ -134,12 +205,14 @@ details#filtre .filtre-container .filtru .range-wrapper input[type=range] {
 details#filtre .filtre-container .filtru {
   /* Custom Radio & Checkbox styling for that aesthetic look */
 }
-details#filtre .filtre-container .filtru .radio-grup, details#filtre .filtre-container .filtru .check-grup {
+details#filtre .filtre-container .filtru .radio-grup,
+details#filtre .filtre-container .filtru .check-grup {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
 }
-details#filtre .filtre-container .filtru .radio-grup label, details#filtre .filtre-container .filtru .check-grup label {
+details#filtre .filtre-container .filtru .radio-grup label,
+details#filtre .filtre-container .filtru .check-grup label {
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -150,10 +223,12 @@ details#filtre .filtre-container .filtru .radio-grup label, details#filtre .filt
   transition: all 0.2s;
   margin: 0;
 }
-details#filtre .filtre-container .filtru .radio-grup label:hover, details#filtre .filtre-container .filtru .check-grup label:hover {
+details#filtre .filtre-container .filtru .radio-grup label:hover,
+details#filtre .filtre-container .filtru .check-grup label:hover {
   background: #e5e7eb;
 }
-details#filtre .filtre-container .filtru .radio-grup label input, details#filtre .filtre-container .filtru .check-grup label input {
+details#filtre .filtre-container .filtru .radio-grup label input,
+details#filtre .filtre-container .filtru .check-grup label input {
   margin-right: 8px;
   accent-color: var(--knockout-red);
 }
@@ -263,7 +338,8 @@ details#filtre .butoane-filtre .btn.btn-outline:hover {
 .grid-produse .produs .produs-header h3 a {
   color: #ffffff !important;
   text-decoration: none !important;
-  text-shadow: none !important; /* PREVENIM GLOW ROSU */
+  text-shadow: none !important;
+  /* PREVENIM GLOW ROSU */
   background: transparent !important;
   box-shadow: none !important;
   transition: color 0.2s;
@@ -276,17 +352,20 @@ details#filtre .butoane-filtre .btn.btn-outline:hover {
 }
 .grid-produse .produs .info-container {
   display: flex;
-  align-items: center; /* Centram pe verticala */
+  align-items: center;
+  /* Centram pe verticala */
   padding: 1rem;
   gap: 1rem;
 }
 .grid-produse .produs .info-container .tabel-info {
-  flex: 1 1 45%; /* Tabelul ocupa mai putin spatiu */
+  flex: 1 1 45%;
+  /* Tabelul ocupa mai putin spatiu */
 }
 .grid-produse .produs .info-container .tabel-info table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.8rem; /* Font mai mic pt a nu distrage atentia */
+  font-size: 0.8rem;
+  /* Font mai mic pt a nu distrage atentia */
 }
 .grid-produse .produs .info-container .tabel-info table th {
   background-color: transparent;
@@ -299,11 +378,14 @@ details#filtre .butoane-filtre .btn.btn-outline:hover {
   font-size: 0.75rem;
   text-transform: uppercase;
 }
-.grid-produse .produs .info-container .tabel-info table tr, .grid-produse .produs .info-container .tabel-info table tbody {
+.grid-produse .produs .info-container .tabel-info table tr,
+.grid-produse .produs .info-container .tabel-info table tbody {
   box-shadow: none !important;
   background: transparent !important;
 }
-.grid-produse .produs .info-container .tabel-info table tr:hover, .grid-produse .produs .info-container .tabel-info table tr:hover td, .grid-produse .produs .info-container .tabel-info table tr:hover th {
+.grid-produse .produs .info-container .tabel-info table tr:hover,
+.grid-produse .produs .info-container .tabel-info table tr:hover td,
+.grid-produse .produs .info-container .tabel-info table tr:hover th {
   box-shadow: none !important;
   background: transparent !important;
 }
@@ -323,7 +405,8 @@ details#filtre .butoane-filtre .btn.btn-outline:hover {
 .grid-produse .produs .info-container .tabel-info table td.pret-bold {
   font-weight: 800;
   color: var(--knockout-red) !important;
-  font-size: 1.4rem; /* PRET FOARTE MARE */
+  font-size: 1.4rem;
+  /* PRET FOARTE MARE */
   display: block;
   text-align: left;
 }
@@ -346,7 +429,8 @@ details#filtre .butoane-filtre .btn.btn-outline:hover {
   box-shadow: none !important;
 }
 .grid-produse .produs .info-container .imagine-produs {
-  flex: 1 1 55%; /* IMAGINEA OCUPA MAJORITATEA SPATIULUI */
+  flex: 1 1 55%;
+  /* IMAGINEA OCUPA MAJORITATEA SPATIULUI */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -355,7 +439,8 @@ details#filtre .butoane-filtre .btn.btn-outline:hover {
 .grid-produse .produs .info-container .imagine-produs figure {
   margin: 0;
   width: 100%;
-  height: 220px; /* Inalta cat trebuie */
+  height: 220px;
+  /* Inalta cat trebuie */
   padding: 0;
   border: none;
   display: flex;
@@ -378,7 +463,8 @@ details#filtre .butoane-filtre .btn.btn-outline:hover {
   font-size: 0.95rem;
   color: #6b7280;
   font-style: italic;
-  flex-grow: 1; /* Pushes the footer down */
+  flex-grow: 1;
+  /* Pushes the footer down */
 }
 .grid-produse .produs .produs-footer-meta {
   padding: 1rem 1.5rem;

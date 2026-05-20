@@ -1,12 +1,13 @@
+require('dotenv').config();
 const fs = require('fs');
 const { Pool } = require('pg');
 
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'postgres',
-    password: 'rarespa55',
-    port: 5432,
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_DATABASE,
+    password: process.env.DB_PASSWORD,
+    port: parseInt(process.env.DB_PORT || '5432'),
 });
 
 async function reseed() {

@@ -697,3 +697,148 @@ main a {
 main a:hover {
     background-size: 100%;
 }
+
+/* ========== DARK MODE - Override variabile site ========== */
+[data-bs-theme="dark"] {
+    --culoare-fundal-pagina: #1b1b1b;
+    --culoare-fundal-zone: #2a2a2a;
+    --culoare-text: #e0e0e0;
+    --culoare-principala: #e63946;
+    --culoare-secundara: #111111;
+    --culoare-highlight: #ff6b6b;
+    --culoare-border: #3a3a3a;
+}
+
+[data-bs-theme="dark"] body {
+    background-color: var(--culoare-fundal-pagina);
+    color: var(--culoare-text);
+}
+
+[data-bs-theme="dark"] main > * {
+    background-color: var(--culoare-fundal-zone);
+    border-color: var(--culoare-border);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Header si Footer - pastreaza textul alb */
+[data-bs-theme="dark"] header,
+[data-bs-theme="dark"] footer {
+    background-color: var(--culoare-secundara);
+    color: #ffffff;
+}
+
+[data-bs-theme="dark"] header h1,
+[data-bs-theme="dark"] .header-stanga h1 {
+    color: #ffffff !important;
+}
+
+[data-bs-theme="dark"] .footer-coloane {
+    color: #ffffff;
+}
+
+[data-bs-theme="dark"] .footer-coloane h3 {
+    color: #ffffff;
+}
+
+[data-bs-theme="dark"] .footer-contact a,
+[data-bs-theme="dark"] .footer-contact a:visited,
+[data-bs-theme="dark"] .footer-linkuri a,
+[data-bs-theme="dark"] .footer-linkuri a:visited {
+    color: #ffffff;
+}
+
+[data-bs-theme="dark"] .footer-contact a:hover,
+[data-bs-theme="dark"] .footer-linkuri a:hover {
+    color: var(--culoare-highlight);
+}
+
+[data-bs-theme="dark"] .footer-copyright {
+    background-color: #0a0a0a;
+    color: #cccccc;
+}
+
+/* Tabele */
+[data-bs-theme="dark"] table {
+    background-color: var(--culoare-fundal-zone);
+    color: var(--culoare-text);
+}
+
+[data-bs-theme="dark"] tfoot th,
+[data-bs-theme="dark"] tfoot td {
+    background-color: #222222;
+}
+
+[data-bs-theme="dark"] thead th {
+    border-bottom-color: #555;
+}
+
+[data-bs-theme="dark"] tbody td {
+    border-bottom-color: #3a3a3a;
+}
+
+/* Tab-uri video */
+[data-bs-theme="dark"] .tab-link {
+    background-color: #333333;
+    color: var(--culoare-text);
+    border-color: var(--culoare-border);
+}
+
+[data-bs-theme="dark"] .tab-link:hover,
+[data-bs-theme="dark"] .tab-link:focus {
+    background-color: var(--culoare-principala);
+    color: #ffffff;
+}
+
+/* Buton top */
+[data-bs-theme="dark"] .buton-top {
+    background-color: #222222;
+    border-color: var(--culoare-border);
+}
+
+/* Link-uri vizitate in main */
+[data-bs-theme="dark"] main a:visited {
+    color: #bb86fc;
+}
+
+/* Dark mode navigatie */
+[data-bs-theme="dark"] body {
+    --nav-bg: #111111;
+    --nav-text: #e0e0e0;
+    --nav-hover-bg: #333333;
+    --subnav-bg: #2a2a2a;
+    --subnav-text: #e0e0e0;
+    --subnav-hover-bg: #3a3a3a;
+    --subnav-hover-text: #e63946;
+}
+
+/* Dark mode galerie statica */
+[data-bs-theme="dark"] #sectiune-galerie-statica {
+    background-color: #111111;
+}
+
+[data-bs-theme="dark"] .item-galerie {
+    background-color: #2a2a2a;
+    border-color: var(--culoare-border);
+}
+
+/* Dark mode text plimbaret */
+[data-bs-theme="dark"] .container-text-plimbaret {
+    background-color: #111111;
+    color: #ccc;
+    border-color: #3a3a3a;
+}
+
+/* Dark mode formule math */
+[data-bs-theme="dark"] math[display="block"] {
+    background-color: var(--culoare-fundal-zone);
+    border-color: var(--culoare-border);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+[data-bs-theme="dark"] math mi {
+    color: var(--culoare-text);
+}
+
+[data-bs-theme="dark"] math mo {
+    color: var(--culoare-text);
+}

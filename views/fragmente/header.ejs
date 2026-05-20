@@ -5,7 +5,7 @@
         </a>
         <h1>FinalRound</h1>
     </div>
-    
+
     <nav class="meniu-principal">
         <input type="checkbox" id="hamburger-toggle" class="hamburger-checkbox">
         <label for="hamburger-toggle" class="hamburger-label">
@@ -20,28 +20,30 @@
             <li class="meniu-item acasa-item">
                 <a href="/"><i class="fa-solid fa-house"></i> <span class="text-meniu">Acasă</span></a>
             </li>
-            
+
             <li class="meniu-item cu-submeniu">
-                <a href="/#bine-ati-venit"><i class="fa-solid fa-star"></i> <span class="text-meniu">Pagina Curentă</span></a>
+                <a href="/#bine-ati-venit"><i class="fa-solid fa-star"></i> <span class="text-meniu">Pagina
+                        Curentă</span></a>
                 <ul class="submeniu">
                     <li><a href="/#oferte-curente">Oferte Curente</a></li>
                     <li><a href="/#statistici">Statistici</a></li>
                     <li><a href="/#evenimente">Evenimente</a></li>
                 </ul>
             </li>
-            
+
             <li class="meniu-item cu-submeniu">
                 <a href="/produse"><i class="fa-solid fa-box-open"></i> <span class="text-meniu">Produse</span></a>
                 <ul class="submeniu">
                     <li><a href="/produse?tip=toate">Toate</a></li>
-                    <% if (locals.categorii && locals.categorii.length > 0) { %>
+                    <% if (locals.categorii && locals.categorii.length> 0) { %>
                         <% for (let cat of locals.categorii) { %>
-                            <li><a href="/produse?tip=<%- cat %>"><%- cat.charAt(0).toUpperCase() + cat.slice(1) %></a></li>
-                        <% } %>
-                    <% } %>
+                            <li><a href="/produse?tip=<%- cat %>"><%- cat.charAt(0).toUpperCase() + cat.slice(1) %></a>
+                            </li>
+                            <% } %>
+                                <% } %>
                 </ul>
             </li>
-            
+
 
             <li class="meniu-item">
                 <a href="/despre"><i class="fa-solid fa-circle-info"></i> <span class="text-meniu">Despre</span></a>
@@ -51,7 +53,15 @@
                 <a href="/contact"><i class="fa-solid fa-envelope"></i> <span class="text-meniu">Contact</span></a>
             </li>
 
-            
+            <li class="meniu-item d-flex align-items-center ms-3">
+                <div class="form-check form-switch text-light">
+                    <input class="form-check-input" type="checkbox" role="switch" id="themeSwitch">
+                    <label class="form-check-label text-meniu ms-1" for="themeSwitch">
+                        <i class="bi bi-moon-stars-fill"></i>
+                    </label>
+                </div>
+            </li>
+
         </ul>
     </nav>
 </header>

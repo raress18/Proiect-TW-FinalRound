@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -7,11 +8,11 @@ const { Pool } = require("pg");
 
 // Setup Baza de date
 const db = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'postgres',
-    password: 'rarespa55',
-    port: 5432,
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_DATABASE,
+    password: process.env.DB_PASSWORD,
+    port: parseInt(process.env.DB_PORT || '5432'),
 });
 
 const app = express();
@@ -406,7 +407,7 @@ app.get("/*pagina", function (req, res) {
         afisareEroare(res, 500);
     }
 });
-
-app.listen(8080, () => {
-    console.log("Serverul a pornit pe portul 8080!");
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+    console.log(`Serverul a pornit pe portul ${PORT}!`);
 });

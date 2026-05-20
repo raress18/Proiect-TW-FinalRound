@@ -1,16 +1,35 @@
-window.addEventListener("load", function() {
+window.addEventListener("load", function () {
     // 10. Validare la schimbare range
-    document.getElementById("inp-pret").onchange = function() {
+    document.getElementById("inp-pret").onchange = function () {
         document.getElementById("val-pret-maxim").innerHTML = this.value;
     }
 
+    // Validare live pentru Textarea (Floating label cu validare)
+    const descriereTextarea = document.getElementById("inp-descriere");
+
+    descriereTextarea.addEventListener("input", function () {
+        let valoare = this.value.toLowerCase().trim();
+        let valRaw = this.value;
+        // Permite litere, cifre, spatii, cratime, virgule, puncte si diacritice romanesti
+        let regex = /^[a-zA-Z0-9 \-ăâîșțĂÂÎȘȚ,.]*$/;
+        
+        // Validare esuată: conține cuvântul "test", are doar 1-2 litere (dacă s-a început scrierea) sau conține caractere nepermise
+        let esteInvalid = valoare.includes("test") || (valoare.length > 0 && valoare.length < 3) || !regex.test(valRaw);
+
+        if (esteInvalid) {
+            this.classList.add("is-invalid");  // Bootstrap Floating label trece în stil 'invalid' roșu
+        } else {
+            this.classList.remove("is-invalid"); // Corectarea automată cerută
+        }
+    });
+
     // Declansare filtru la click pe iconita de search din afara filtrelor
-    document.getElementById("btn-search-icon").onclick = function() {
+    document.getElementById("btn-search-icon").onclick = function () {
         document.getElementById("btn-filtrare").click();
     };
 
     // Suport pentru tasta Enter in search bar
-    document.getElementById("inp-nume").addEventListener("keypress", function(e) {
+    document.getElementById("inp-nume").addEventListener("keypress", function (e) {
         if (e.key === "Enter") {
             e.preventDefault();
             document.getElementById("btn-filtrare").click();
@@ -18,14 +37,14 @@ window.addEventListener("load", function() {
     });
 
     // Buton filtrare
-    document.getElementById("btn-filtrare").onclick = function() {
+    document.getElementById("btn-filtrare").onclick = function () {
         let rawNume = document.getElementById("inp-nume").value;
         let valNume = rawNume.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         let valPret = parseFloat(document.getElementById("inp-pret").value);
         let valCuloare = document.getElementById("inp-culoare").value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        
+
         let radAprobat = document.querySelector('input[name="gr-rad"]:checked').value;
-        
+
         let checkBoxuri = document.querySelectorAll('input[name="mat"]:checked');
         let materialeSelectate = [];
         for (let ch of checkBoxuri) {
@@ -33,7 +52,7 @@ window.addEventListener("load", function() {
         }
 
         let valDescriere = document.getElementById("inp-descriere").value.toLowerCase();
-        
+
         let valCategorie = document.getElementById("inp-categorie").value;
 
         let selectSport = document.getElementById("inp-sport");
@@ -47,6 +66,11 @@ window.addEventListener("load", function() {
         // 10. Validare
         if (rawNume && !/^[a-zA-Z0-9 \-ăâîșțĂÂÎȘȚ]+$/.test(rawNume)) {
             alert("Numele produsului contine caractere invalide!");
+            return;
+        }
+
+        if (document.getElementById("inp-descriere").classList.contains("is-invalid")) {
+            alert("Cuvintele cheie din descriere contin caractere invalide sau sunt prea scurte!");
             return;
         }
 
@@ -69,7 +93,7 @@ window.addEventListener("load", function() {
             let condAprobat = radAprobat === "toate" || radAprobat === aprobat;
             let condCategorie = valCategorie === "toate" || valCategorie === categorie;
             let condDescriere = valDescriere === "" || descriere.includes(valDescriere);
-            
+
             let condMateriale = true;
             if (materialeSelectate.length > 0) {
                 condMateriale = false;
@@ -88,7 +112,7 @@ window.addEventListener("load", function() {
                 }
             } else {
                 // daca nimic nu e selectat la multiplu (practic imposibil cu conditia de validare, dar preventiv)
-                condSport = true; 
+                condSport = true;
             }
 
             if (condNume && condPret && condCuloare && condAprobat && condCategorie && condDescriere && condMateriale && condSport) {
@@ -102,11 +126,11 @@ window.addEventListener("load", function() {
         let articole = document.getElementsByClassName("produs");
         let v_articole = Array.from(articole);
 
-        v_articole.sort(function(a, b) {
+        v_articole.sort(function (a, b) {
             let greutate_a = parseInt(a.querySelector(".val-greutate").innerHTML);
             let pret_a = parseFloat(a.querySelector(".val-pret").innerHTML);
             let raport_a = pret_a > 0 ? greutate_a / pret_a : 0;
-            
+
             let greutate_b = parseInt(b.querySelector(".val-greutate").innerHTML);
             let pret_b = parseFloat(b.querySelector(".val-pret").innerHTML);
             let raport_b = pret_b > 0 ? greutate_b / pret_b : 0;
@@ -125,16 +149,16 @@ window.addEventListener("load", function() {
         }
     }
 
-    document.getElementById("btn-sort-asc").onclick = function() {
+    document.getElementById("btn-sort-asc").onclick = function () {
         sorteaza(1);
     }
 
-    document.getElementById("btn-sort-desc").onclick = function() {
+    document.getElementById("btn-sort-desc").onclick = function () {
         sorteaza(-1);
     }
 
     // Buton Calculare
-    document.getElementById("btn-calcul").onclick = function() {
+    document.getElementById("btn-calcul").onclick = function () {
         let articole = document.getElementsByClassName("produs");
         let suma = 0;
         for (let art of articole) {
@@ -159,7 +183,7 @@ window.addEventListener("load", function() {
 
         document.body.appendChild(divCalcul);
 
-        setTimeout(function() {
+        setTimeout(function () {
             if (document.getElementById("div-calcul-dinamic")) {
                 document.getElementById("div-calcul-dinamic").remove();
             }
@@ -167,22 +191,23 @@ window.addEventListener("load", function() {
     }
 
     // Resetare filtre
-    document.getElementById("btn-reset").onclick = function() {
+    document.getElementById("btn-reset").onclick = function () {
         if (confirm("Esti sigur ca vrei sa resetezi filtrele?")) {
             document.getElementById("inp-nume").value = "";
             document.getElementById("inp-pret").value = 1000;
             document.getElementById("val-pret-maxim").innerHTML = "1000";
             document.getElementById("inp-culoare").value = "";
             document.querySelector('input[name="gr-rad"][value="toate"]').checked = true;
-            
+
             let checkBoxuri = document.querySelectorAll('input[name="mat"]');
             for (let ch of checkBoxuri) {
                 ch.checked = false;
             }
 
             document.getElementById("inp-descriere").value = "";
+            document.getElementById("inp-descriere").classList.remove("is-invalid");
             document.getElementById("inp-categorie").value = "toate";
-            
+
             let selectSport = document.getElementById("inp-sport");
             for (let opt of selectSport.options) {
                 opt.selected = true;
@@ -191,10 +216,10 @@ window.addEventListener("load", function() {
             let articole = document.getElementsByClassName("produs");
             // reseteaza si sortarea (pentru simplitate, reincarcam pagina dar cu parametrul din query curatat, sau doar punem in ordinea ID-ului. Vom reincarca pt ordine initiala 100%)
             // cerinta zice "Se reafișează toate produsele (fără nicun filtru aplicat) și în ordinea inițială"
-            
+
             // Refacem in ordinea initiala a ID-urilor daca vrem din JS:
             let v_articole = Array.from(articole);
-            v_articole.sort(function(a, b) {
+            v_articole.sort(function (a, b) {
                 let id_a = parseInt(a.id.split("_")[1]);
                 let id_b = parseInt(b.id.split("_")[1]);
                 return id_a - id_b;

@@ -1,40 +1,51 @@
-// 1. Culori de background pentru 2 teme personalizate
-$primary: #d20a0a; 
+// 1. Culori de background
+$primary: #d20a0a;
 $success: #28a745;
 $dark: #1a1a1a;
+$secondary: #6c757d;
 
-// 2. Culori de font (litere)
+// 2. Culori de font
 $body-color: #333333;
-$btn-primary-color: #ffffff; // Culoarea textului pe butoane primary
+$btn-primary-color: #ffffff;
 
-// 3. Dimensiuni de ecran diferite (Custom Breakpoints)
+// 3. Breakpoints (Custom)
 $grid-breakpoints: (
   xs: 0,
   sm: 576px,
-  md: 850px,  
-  lg: 1150px, 
+  md: 850px,
+  lg: 1150px,
   xl: 1200px
 );
 
-// 4. Dimensiunea razelor de border (Border Radius)
+// 4. Border Radius și Grosime (Adăugate conform cerinței)
 $border-radius: 15px;
 $border-radius-sm: 10px;
+$btn-border-radius: 12px;
+$border-width: 2px;
+$btn-border-width: $border-width;
 
-// 5. Dimensiunea headingurilor
+// 5. Headings
 $h1-font-size: 2.8rem;
 $h2-font-size: 2rem;
 
-// 6. Familia de font implicita
+// 6. Font
 $font-family-sans-serif: 'Verdana', sans-serif;
 
-// 7. Variabila extra: spatierea butoanelor
+// 7. Spațiere butoane
 $btn-padding-y: 0.75rem;
 
-// IMPORTUL BOOTSTRAP (Trebuie sa fie DUPA variabilele de mai sus)
+// --- CUSTOMIZARE RANGE INPUT ---
+// Dimensiune bulină (1.5rem este cu 50% mai mare decât 1rem - mărimea de bază)
+$form-range-thumb-width: 1.5rem;
+$form-range-thumb-height: 1.5rem;
+// Culoare bulină și slider
+$form-range-thumb-bg: $primary;
+$form-range-track-bg: #e9ecef;
+
+// IMPORTUL BOOTSTRAP
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
-/* 8. Corectare Bootstrap */
-// Resetam regulile care ar putea intra in conflict cu layout-ul 
+/* Corectare Bootstrap */
 main {
-    display: grid !important; // Ne asiguram ca ramane grid-ul 
+  display: grid !important;
 }
