@@ -20,6 +20,7 @@
     color: #374151;
 }
 
+// Etapa6: light/dark theme cu variabile CSS (req. 99)
 /* Dark mode pentru pagina de produse */
 [data-bs-theme="dark"] {
     --box-border-color: #3a3a3a;
@@ -311,6 +312,7 @@ details#filtre {
     }
 }
 
+// Etapa6: Produsele se vor afisa cu ajutorul unui grid sau flexbox (req. 74)
 /* GRILA PRODUSE */
 .grid-produse {
     display: grid;
@@ -469,6 +471,7 @@ details#filtre {
                 }
             }
 
+            // Etapa6: Pentru estetica, imaginile de aceeasi dimensiune si relativ mici ca sa incapa langa tabel (req. 51)
             .imagine-produs {
                 flex: 1 1 55%;
                 /* IMAGINEA OCUPA MAJORITATEA SPATIULUI */

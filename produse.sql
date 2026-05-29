@@ -1,31 +1,32 @@
--- Creare baza de date si utilizator (se vor executa cu un user admin, de ex. postgres)
+-- Etapa6: Creare utilizator, baza de date, tabel (req. 7, 9)
 -- CREATE DATABASE magazin_contact;
 -- CREATE USER user_magazin WITH ENCRYPTED PASSWORD 'parola123';
 -- GRANT ALL PRIVILEGES ON DATABASE magazin_contact TO user_magazin;
 
 -- conectare la baza de date magazin_contact si rulare script:
 
-DROP TABLE IF EXISTS produse;
+DROP TABLE IF EXISTS produse CASCADE;
 DROP TYPE IF EXISTS categorie_echipament;
 
+-- Etapa6: Categorie mare ca enumeratie (req. 15)
 CREATE TYPE categorie_echipament AS ENUM('manusi', 'protectie', 'imbracaminte', 'antrenament', 'accesorii');
 
 CREATE TABLE produse (
-    id SERIAL PRIMARY KEY,
-    nume VARCHAR(100) NOT NULL,
+    id SERIAL PRIMARY KEY, -- Etapa6: id (req. 11)
+    nume VARCHAR(100) NOT NULL, -- Etapa6: nume, descriere, imagine (req. 12-14)
     descriere TEXT NOT NULL,
     imagine VARCHAR(255) NOT NULL,
     categorie categorie_echipament NOT NULL,
-    tip_sport VARCHAR(50) NOT NULL, -- ex: Box, MMA, BJJ, General
-    pret NUMERIC(8, 2) NOT NULL,
-    greutate INTEGER NOT NULL, -- greutate in grame
-    data_adaugare DATE NOT NULL DEFAULT CURRENT_DATE,
-    culoare VARCHAR(30) NOT NULL,
-    materiale VARCHAR(255) NOT NULL, -- separate prin virgula
-    aprobat_competitie BOOLEAN NOT NULL
+    tip_sport VARCHAR(50) NOT NULL, -- Etapa6: mod categorizare secundar (req. 16)
+    pret NUMERIC(8, 2) NOT NULL, -- Etapa6: pret (req. 17)
+    greutate INTEGER NOT NULL, -- Etapa6: a doua caracteristica numerica (req. 18)
+    data_adaugare DATE NOT NULL DEFAULT CURRENT_DATE, -- Etapa6: data calendaristica (req. 19)
+    culoare VARCHAR(30) NOT NULL, -- Etapa6: o singura valoare (req. 20)
+    materiale VARCHAR(255) NOT NULL, -- Etapa6: mai multe valori, separate prin virgula (req. 21)
+    aprobat_competitie BOOLEAN NOT NULL -- Etapa6: caracteristica booleana (req. 22)
 );
 
--- Inserare 16 produse cu date variate pentru a putea fi testate sortarile si filtrarile
+-- Etapa6: Inserare 15-20 entitati (req. 25)
 INSERT INTO produse (nume, descriere, imagine, categorie, tip_sport, pret, greutate, data_adaugare, culoare, materiale, aprobat_competitie) VALUES
 ('Mănuși Box Elite 14oz', 'Mănuși de box din piele naturală, ideale pentru sparring.', 'galerie/manusi_box.jpg', 'manusi', 'Box', 280.00, 396, '2023-05-10', 'Negru', 'Piele naturala,Spuma cu densitate tripla', true),
 ('Mănuși MMA Sparring', 'Mănuși cu degete libere, padding gros pe monturi.', 'galerie/manusi_mma.jpg', 'manusi', 'MMA', 190.50, 113, '2023-06-22', 'Negru', 'Piele sintetica,Gel', false),
@@ -44,3 +45,42 @@ INSERT INTO produse (nume, descriere, imagine, categorie, tip_sport, pret, greut
 ('Geantă Echipament', 'Geantă mare ventilată pentru tot echipamentul.', 'galerie/geanta_sport.jpg', 'accesorii', 'General', 180.00, 800, '2023-07-02', 'Negru', 'Nylon,Plasa', false),
 ('Cremă Încălzire Musculară', 'Cremă pentru pregătirea mușchilor înainte de efort.', 'galerie/crema_incalzire.jpg', 'accesorii', 'General', 55.00, 150, '2023-08-11', 'Negru', 'Extracte naturale,Mentol', true);
 
+-- Bonus 17: Seturi de produse
+DROP TABLE IF EXISTS asociere_set;
+DROP TABLE IF EXISTS seturi;
+
+CREATE TABLE seturi (
+    id SERIAL PRIMARY KEY,
+    nume_set VARCHAR(100) NOT NULL,
+    descriere_set TEXT NOT NULL
+);
+
+CREATE TABLE asociere_set (
+    id SERIAL PRIMARY KEY,
+    id_set INTEGER NOT NULL REFERENCES seturi(id) ON DELETE CASCADE,
+    id_produs INTEGER NOT NULL REFERENCES produse(id) ON DELETE CASCADE
+);
+
+INSERT INTO seturi (nume_set, descriere_set) VALUES
+('Set Începător Box', 'Echipament complet pentru începători la box (mănuși și protecție).'),
+('Set Pro MMA', 'Echipament avansat pentru MMA (mănuși, rashguard, pantaloni).'),
+('Set Sparring', 'Set pentru antrenament cu partener (tibiere, cască, mănuși, proteză).'),
+('Set Echipament BJJ', 'Tot ce ai nevoie pentru antrenamentele de BJJ.'),
+('Set Antrenament Acasă', 'Pentru antrenamente solo (sac, mănuși sac, coardă).');
+
+INSERT INTO asociere_set (id_set, id_produs) VALUES
+(1, (SELECT id FROM produse WHERE nume = 'Mănuși Box Elite 14oz' LIMIT 1)),
+(1, (SELECT id FROM produse WHERE nume = 'Proteză Dentară Gel' LIMIT 1)),
+(1, (SELECT id FROM produse WHERE nume = 'Fașe Box 4.5m' LIMIT 1)),
+(2, (SELECT id FROM produse WHERE nume = 'Mănuși MMA Sparring' LIMIT 1)),
+(2, (SELECT id FROM produse WHERE nume = 'Rashguard BJJ Maneca Lunga' LIMIT 1)),
+(2, (SELECT id FROM produse WHERE nume = 'Pantaloni Fight Shorts' LIMIT 1)),
+(3, (SELECT id FROM produse WHERE nume = 'Tibiere Kickboxing' LIMIT 1)),
+(3, (SELECT id FROM produse WHERE nume = 'Cască Protecție Full-Face' LIMIT 1)),
+(3, (SELECT id FROM produse WHERE nume = 'Mănuși Box Elite 14oz' LIMIT 1)),
+(3, (SELECT id FROM produse WHERE nume = 'Proteză Dentară Gel' LIMIT 1)),
+(4, (SELECT id FROM produse WHERE nume = 'Kimono BJJ Competitie' LIMIT 1)),
+(4, (SELECT id FROM produse WHERE nume = 'Rashguard BJJ Maneca Lunga' LIMIT 1)),
+(5, (SELECT id FROM produse WHERE nume = 'Sac de Box 40kg' LIMIT 1)),
+(5, (SELECT id FROM produse WHERE nume = 'Mănuși Sac' LIMIT 1)),
+(5, (SELECT id FROM produse WHERE nume = 'Coardă Viteză Rulmenți' LIMIT 1));

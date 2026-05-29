@@ -17,11 +17,12 @@ $grid-breakpoints: (
   xl: 1200px
 );
 
+// Etapa6: Raza si grosime border butoane date in SASS, customizari Bootstrap (req. 92, 93)
 // 4. Border Radius și Grosime (Adăugate conform cerinței)
 $border-radius: 15px;
 $border-radius-sm: 10px;
 $btn-border-radius: 12px;
-$border-width: 2px;
+$border-width: 2px; //grosimea chenarului
 $btn-border-width: $border-width;
 
 // 5. Headings
@@ -34,6 +35,7 @@ $font-family-sans-serif: 'Verdana', sans-serif;
 // 7. Spațiere butoane
 $btn-padding-y: 0.75rem;
 
+// Etapa6: Customizare input de tip range (dimensiune bulina cu 50% mai mare, culoare bulina/slider) (req. 98)
 // --- CUSTOMIZARE RANGE INPUT ---
 // Dimensiune bulină (1.5rem este cu 50% mai mare decât 1rem - mărimea de bază)
 $form-range-thumb-width: 1.5rem;

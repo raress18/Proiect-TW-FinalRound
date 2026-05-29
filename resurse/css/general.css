@@ -698,6 +698,7 @@ main a:hover {
     background-size: 100%;
 }
 
+/* Cerinta.txt: light/dark theme cu variabile CSS (req. 99) */
 /* ========== DARK MODE - Override variabile site ========== */
 [data-bs-theme="dark"] {
     --culoare-fundal-pagina: #1b1b1b;

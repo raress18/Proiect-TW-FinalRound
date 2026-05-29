@@ -1,0 +1,2 @@
+Bonus 2 (0.15p) Utilizatorul să poată alege dintre 3 sau mai multe teme (nu doar light/dark). Ca și în cazul light/dark, tema aleasă se memorează în localStorage. Modul de alegere a temei se poate realiza printr-un select simplu sau radio buttons.
+Bonus 3 (0.05p) Dacă nu sunt produse de afișat în urma filtrării, se va afișa un mesaj corespunzător în locul produselor (de exemplu: "nu exista produse conform filtrării curente")

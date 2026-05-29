@@ -31,6 +31,7 @@
                 </ul>
             </li>
 
+            <!-- Etapa6: Optiune 'Produse' in meniu cu suboptiuni generate dinamic (toate, categ_1...) - req. 29 -->
             <li class="meniu-item cu-submeniu">
                 <a href="/produse"><i class="fa-solid fa-box-open"></i> <span class="text-meniu">Produse</span></a>
                 <ul class="submeniu">
@@ -41,6 +42,7 @@
                             </li>
                             <% } %>
                                 <% } %>
+                    <li><a href="/seturi">Seturi Produse</a></li>
                 </ul>
             </li>
 
@@ -54,6 +56,7 @@
             </li>
 
             <li class="meniu-item d-flex align-items-center ms-3">
+                <!-- Etapa6: Switch tema din Bootstrap pentru tema light/dark - req. 97, 99 -->
                 <div class="form-check form-switch text-light">
                     <input class="form-check-input" type="checkbox" role="switch" id="themeSwitch">
                     <label class="form-check-label text-meniu ms-1" for="themeSwitch">

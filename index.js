@@ -6,7 +6,7 @@ const sass = require("sass");
 const sharp = require("sharp");
 const { Pool } = require("pg");
 
-// Setup Baza de date
+// Etapa6: Setup Baza de date si conectare 
 const db = new Pool({
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
@@ -330,11 +330,15 @@ app.get(["/", "/index", "/home"], function (req, res) {
     });
 });
 
-// Extragere categorii din BD si salvare in app.locals
+// Etapa6: Extragere categorii din enumeratie BD si salvare in locals pentru Meniu 
+//folosim async ca sa nu blocheze restul programului si sa pot folosi await
+//next paseaza cererea mai departe catrea ruta 
 app.use(async (req, res, next) => {
-    if (!app.locals.categorii) {
+    if (!app.locals.categorii) { //initial e gol
         try {
+            //creez o noua coloana "categorie" cu ajutorul NULL::categorie_echipament pentru o variabila nula de acest tip de date
             const rez = await db.query("SELECT unnest(enum_range(NULL::categorie_echipament)) AS categorie");
+            //transformam in vector de stringuri cu map
             app.locals.categorii = rez.rows.map(row => row.categorie);
         } catch (err) {
             console.error("Eroare la preluarea categoriilor:", err);
@@ -344,6 +348,7 @@ app.use(async (req, res, next) => {
     next();
 });
 
+// Etapa6: Meniu/Filtrare pe categorii la nivel de server, trimite vectorul doar cu produsele din categorie (req. 29)
 app.get("/produse", async function (req, res) {
     let tipCategorie = req.query.tip;
     let query = "SELECT * FROM produse";
@@ -355,21 +360,108 @@ app.get("/produse", async function (req, res) {
 
     try {
         const rez = await db.query(query, valori);
-        res.render("pagini/produse", { produse: rez.rows, categorie: tipCategorie || "toate" });
+        
+        // Bonus: Get dynamic filter attributes
+        const infoFiltreRez = await db.query(`
+            SELECT 
+                MIN(pret) as pret_min, MAX(pret) as pret_max,
+                MIN(LENGTH(nume)) as nume_min_len, MAX(LENGTH(nume)) as nume_max_len,
+                MIN(LENGTH(descriere)) as desc_min_len, MAX(LENGTH(descriere)) as desc_max_len,
+                ARRAY_AGG(DISTINCT culoare) as culori,
+                ARRAY_AGG(DISTINCT tip_sport) as sporturi,
+                ARRAY_AGG(DISTINCT aprobat_competitie) as aprobari
+            FROM produse
+        `);
+        const infoFiltre = infoFiltreRez.rows[0];
+        
+        const filtre = {
+            pretMin: infoFiltre.pret_min,
+            pretMax: infoFiltre.pret_max,
+            numeMinLen: infoFiltre.nume_min_len,
+            numeMaxLen: infoFiltre.nume_max_len,
+            descMinLen: infoFiltre.desc_min_len,
+            descMaxLen: infoFiltre.desc_max_len,
+            culori: infoFiltre.culori,
+            sporturi: infoFiltre.sporturi,
+            aprobari: infoFiltre.aprobari
+        };
+
+        res.render("pagini/produse", { produse: rez.rows, categorie: tipCategorie || "toate", filtre: filtre });
     } catch (err) {
         console.error("Eroare incarcare produse:", err);
         afisareEroare(res, 500);
     }
 });
 
+// Bonus 17: Pagina seturi
+app.get("/seturi", async function (req, res) {
+    try {
+        const querySeturi = `
+            SELECT s.id, s.nume_set, s.descriere_set,
+                   json_agg(json_build_object(
+                       'id', p.id,
+                       'nume', p.nume,
+                       'imagine', p.imagine,
+                       'pret', p.pret
+                   )) as produse,
+                   SUM(p.pret) as pret_total,
+                   COUNT(p.id) as nr_produse
+            FROM seturi s
+            JOIN asociere_set a ON s.id = a.id_set
+            JOIN produse p ON a.id_produs = p.id
+            GROUP BY s.id, s.nume_set, s.descriere_set
+        `;
+        const rez = await db.query(querySeturi);
+        
+        const seturi = rez.rows.map(set => {
+            // reducerea este de min(5, n) * 5%
+            const reducere = Math.min(5, parseInt(set.nr_produse)) * 0.05;
+            set.pret_redus = (set.pret_total * (1 - reducere)).toFixed(2);
+            return set;
+        });
+
+        res.render("pagini/seturi", { seturi });
+    } catch (err) {
+        console.error("Eroare incarcare seturi:", err);
+        afisareEroare(res, 500);
+    }
+});
+
+// Etapa6: Pagina dedicata produs unic generata automat cu date trimise prin locals (req. 5)
 app.get("/produs/:id", async function (req, res) {
     try {
-        const rez = await db.query("SELECT * FROM produse WHERE id = $1", [req.params.id]);
+        const rez = await db.query("SELECT * FROM produse WHERE id = $1", [req.params.id]);//params ia ce e in url /produs/2 
         if (rez.rows.length === 0) {
             afisareEroare(res, 404, "Produs inexistent", "Produsul nu a fost gasit in baza de date.");
             return;
         }
-        res.render("pagini/produs", { produs: rez.rows[0] });
+        
+        // Bonus 17: Get sets for this product
+        const querySeturi = `
+            SELECT s.id, s.nume_set, s.descriere_set,
+                   json_agg(json_build_object(
+                       'id', p.id,
+                       'nume', p.nume,
+                       'imagine', p.imagine,
+                       'pret', p.pret
+                   )) as produse,
+                   SUM(p.pret) as pret_total,
+                   COUNT(p.id) as nr_produse
+            FROM seturi s
+            JOIN asociere_set a ON s.id = a.id_set
+            JOIN produse p ON a.id_produs = p.id
+            WHERE s.id IN (SELECT id_set FROM asociere_set WHERE id_produs = $1)
+            GROUP BY s.id, s.nume_set, s.descriere_set
+        `;
+        const seturiRez = await db.query(querySeturi, [req.params.id]);
+        
+        const seturi = seturiRez.rows.map(set => {
+            const reducere = Math.min(5, parseInt(set.nr_produse)) * 0.05;
+            set.pret_redus = (set.pret_total * (1 - reducere)).toFixed(2);
+            return set;
+        });
+
+        res.render("pagini/produs", { produs: rez.rows[0], seturi });//vectorul are un singur element ca e produs unic
     } catch (err) {
         console.error("Eroare produs:", err);
         afisareEroare(res, 500);

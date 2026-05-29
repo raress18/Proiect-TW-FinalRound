@@ -18,15 +18,18 @@
             <div class="wrapper-interior-produse" style="display: block; width: 100%;">
 
                 <div class="titlu-sectiune-produse">
-                    <h2>Echipamente (<%- categorie.toUpperCase() %>)</h2>
+                    <h2>Echipamente (<%- categorie.toUpperCase() %>)</h2> <!-- transforma in uppercase -->
                 </div>
 
+                <!-- Etapa6: Input tip text (nume produs partial), req. 62, 76 -->
                 <!-- Search bar principal (în afara filtrelor detaliate) -->
                 <div class="search-bar-container" style="display: flex; justify-content: center; margin-bottom: 25px;">
                     <div class="filtru-nume-minimalist"
                         style="display: flex; align-items: center; background-color: #ffffff; border: 1px solid #d1d5db; border-radius: 30px; padding: 5px 20px; width: 100%; max-width: 600px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: box-shadow 0.2s;">
                         <input type="text" id="inp-nume" placeholder="Caută un echipament..."
+                            minlength="<%- filtre.numeMinLen %>" maxlength="<%- filtre.numeMaxLen %>"
                             style="border: none; background: transparent; outline: none; flex: 1; padding: 10px; font-size: 1.1em; color: #374151;">
+                        <!-- flex 1 impinge lupa la dreapta maxim-->
                         <i class="fa-solid fa-magnifying-glass" id="btn-search-icon"
                             style="color: #6b7280; font-size: 1.2em; cursor: pointer; padding: 10px; transition: color 0.2s;"
                             onmouseover="this.style.color='#111827'" onmouseout="this.style.color='#6b7280'"
@@ -34,7 +37,7 @@
                     </div>
                 </div>
 
-                <!-- Sectiunea de filtre (Deasupra produselor conform cerintei, retractabila) -->
+                <!-- Sectiunea de filtre  -->
                 <details id="filtre" class="mb-4">
                     <summary class="header-filtre mb-3">
                         <h3><i class="bi bi-sliders"></i> Filtrare Avansată</h3>
@@ -42,36 +45,40 @@
 
                     <div class="row g-4 align-items-center">
 
+                        <!-- Etapa6: Input de tip range pentru o caracteristica numerica secundara cu afisare valoare - req. 63, 77 -->
                         <div class="col-12 col-md-6 col-lg-4">
                             <label for="inp-pret" class="form-label"><i class="bi bi-cash-coin"></i> Preț maxim: <span
-                                    id="val-pret-maxim" class="badge bg-danger">1000</span> RON</label>
-                            <input type="range" class="form-range" id="inp-pret" min="0" max="1000" step="10"
-                                value="1000">
+                                    id="val-pret-maxim" class="badge bg-danger"><%- filtre.pretMax %></span> RON</label>
+                            <input type="range" class="form-range" id="inp-pret" min="<%- filtre.pretMin %>" max="<%- filtre.pretMax %>" step="10"
+                                value="<%- filtre.pretMax %>">
                         </div>
 
+                        <!-- Etapa6: Datalist - req. 64 -->
                         <div class="col-12 col-md-6 col-lg-4">
                             <label for="inp-culoare" class="form-label"><i class="bi bi-palette"></i> Culoare:</label>
+                            <!--label for + id permite sa dai click pe text-->
                             <input class="form-control form-control-sm" list="culori" id="inp-culoare"
                                 placeholder="Selectează o culoare">
                             <datalist id="culori">
-                                <option value="Negru">
-                                <option value="Alb">
-                                <option value="Rosu">
-                                <option value="Albastru">
-                                <option value="Galben">
+                                <% for(let c of filtre.culori) { %>
+                                <option value="<%- c %>">
+                                <% } %>
                             </datalist>
                         </div>
 
+                        <!-- Etapa6: Select simplu cu prima optiune 'oricare' - req. 68 -->
                         <div class="col-12 col-md-6 col-lg-4">
                             <label for="inp-categorie" class="form-label"><i class="bi bi-tags"></i> Categorie:</label>
                             <select class="form-select form-select-sm" id="inp-categorie">
                                 <option value="toate" selected>Oricare</option>
+                                <!--default + toate categoriile, aici e trimmis .map ala-->
                                 <% for (let cat of locals.categorii || []) { %>
                                     <option value="<%- cat %>"><%- cat %></option>
                                     <% } %>
                             </select>
                         </div>
 
+                        <!-- Etapa6: Grup de inputuri radio pentru caracteristica booleana (da/nu/toate) si stilizare toggle buttons - req. 65, 78, 95 -->
                         <div class="col-12 col-md-6 col-lg-4">
                             <label class="form-label d-block"><i class="bi bi-award"></i> Aprobat competiție:</label>
                             <div class="btn-group" role="group" aria-label="Aprobat competitie">
@@ -79,46 +86,57 @@
                                     autocomplete="off" checked>
                                 <label class="btn btn-outline-primary" for="rad-toate">Toate</label>
 
+                                <% if (filtre.aprobari.includes(true)) { %>
                                 <input type="radio" class="btn-check" name="gr-rad" id="rad-da" value="da"
                                     autocomplete="off">
                                 <label class="btn btn-outline-primary" for="rad-da">Da</label>
+                                <% } %>
 
+                                <% if (filtre.aprobari.includes(false)) { %>
                                 <input type="radio" class="btn-check" name="gr-rad" id="rad-nu" value="nu"
                                     autocomplete="off">
                                 <label class="btn btn-outline-primary" for="rad-nu">Nu</label>
+                                <% } %>
                             </div>
+                            <!--au acelasi name ca sa se deselecteze cand altul e selectat(pentru ca sunt radio) -->
                         </div>
 
+                        <!-- Etapa6: Grup checkbox pt caracteristica cu mai multe valori si stilizare toggle buttons - req. 66, 95 -->
                         <!-- Checkbox grup (Materiale) ca toggle buttons Bootstrap -->
                         <div class="col-12 col-md-6 col-lg-4">
                             <label class="form-label d-block"><i class="bi bi-layers-half"></i> Materiale:</label>
                             <div class="btn-group" role="group" aria-label="Materiale">
-                                <input type="checkbox" class="btn-check" name="mat" id="chk-piele" value="Piele" autocomplete="off">
+                                <input type="checkbox" class="btn-check" name="mat" id="chk-piele" value="Piele"
+                                    autocomplete="off">
                                 <label class="btn btn-outline-primary" for="chk-piele">Piele</label>
+                                <!--aici se inlocuieste checkboxul clasic cu stilizarea bootstrap-->
 
-                                <input type="checkbox" class="btn-check" name="mat" id="chk-spuma" value="Spuma" autocomplete="off">
+                                <input type="checkbox" class="btn-check" name="mat" id="chk-spuma" value="Spuma"
+                                    autocomplete="off">
                                 <label class="btn btn-outline-primary" for="chk-spuma">Spumă</label>
 
-                                <input type="checkbox" class="btn-check" name="mat" id="chk-bumbac" value="Bumbac" autocomplete="off">
+                                <input type="checkbox" class="btn-check" name="mat" id="chk-bumbac" value="Bumbac"
+                                    autocomplete="off">
                                 <label class="btn btn-outline-primary" for="chk-bumbac">Bumbac</label>
                             </div>
                         </div>
 
+                        <!-- Etapa6: Select multiplu - req. 69 -->
                         <div class="col-12 col-md-6 col-lg-4">
                             <label for="inp-sport" class="form-label"><i class="bi bi-cart"></i> Tip Sport
                                 (Multiplu):</label>
                             <select class="form-select" id="inp-sport" multiple size="3">
-                                <option value="Box" selected>Box</option>
-                                <option value="MMA" selected>MMA</option>
-                                <option value="Kickboxing" selected>Kickboxing</option>
-                                <option value="BJJ" selected>BJJ</option>
-                                <option value="General" selected>General</option>
+                                <% for (let s of filtre.sporturi) { %>
+                                <option value="<%- s %>" selected><%- s %></option>
+                                <% } %>
                             </select>
                         </div>
 
+                        <!-- Etapa6: Textarea cu floating label si clasa is-invalid - req. 67, 94 -->
                         <div class="col-12 col-lg-4">
                             <div class="form-floating">
                                 <textarea class="form-control" id="inp-descriere" placeholder="Specificații..."
+                                    minlength="<%- filtre.descMinLen %>" maxlength="<%- filtre.descMaxLen %>"
                                     style="height: 100px"></textarea>
                                 <label for="inp-descriere"><i class="bi bi-chat-left-text"></i> Cuvinte cheie în
                                     descriere</label>
@@ -130,8 +148,11 @@
 
                     </div>
 
+                    <!-- Etapa6: Butoane filtrare, sortare (2), calculare si resetare - req. 85-89, 93 -->
+                    <!--mt-4 adauga o marja de 4 deasupra, d-flex face felxbox, flex-wrap lasa sa se intinda pe mai multe randuri-->
                     <div class="butoane-filtre mt-4 d-flex flex-wrap gap-2 justify-content-center">
                         <button id="btn-filtrare" class="btn btn-primary btn-lg">
+                            <!--d-none ascunde textul pe ecrane foarte mici, d-sm-inline face textul vizibil iar pe ecrane mai mari-->
                             <i class="bi bi-funnel-fill"></i> <span class="d-none d-sm-inline">Aplică Filtre</span>
                         </button>
                         <button id="btn-sort-asc" class="btn btn-secondary btn-md">
@@ -160,7 +181,8 @@
                                     <h3 class="nume-produs"><a href="/produs/<%- p.id %>"><%- p.nume %></a></h3>
                                 </div>
 
-                                <!-- Continut principal (Tabel stanga, Imagine dreapta cerinta.txt) -->
+                                <!-- Etapa6: Tabel cu detalii (stanga) si imagine (dreapta) la afisare produs - req. 36-52 -->
+                                <!-- Continut principal (Tabel stanga, Imagine dreapta Etapa6) -->
                                 <div class="info-container">
                                     <div class="tabel-info">
                                         <table>
@@ -191,6 +213,7 @@
                                                 </td>
                                             </tr>
                                             <tr style="display:none;">
+                                                <!--e ca sa ajute js, dar nu imi trebuie sa il vad pe ecran-->
                                                 <td>Tip Sport</td>
                                                 <td class="val-sport"><%- p.tip_sport %></td>
                                             </tr>
@@ -201,6 +224,7 @@
                                         <figure>
                                             <img src="/resurse/imagini/<%- p.imagine %>" alt="<%- p.nume %>"
                                                 onerror="this.src='/resurse/imagini/echipament_mic.jpg'">
+                                            <!--onerror inlocuieste poza cu alta daca prima nu e disponibila-->
                                         </figure>
                                     </div>
                                 </div>
@@ -212,8 +236,10 @@
 
                                 <div class="produs-footer-meta">
                                     <span class="val-categorie categorie-tag"><%- p.categorie %></span>
+                                    <!-- Etapa6: Data calendaristica afisata in format <time> - req. 45 -->
                                     <% const d=new Date(p.data_adaugare); const luni=["Ian", "Feb" , "Mar" , "Apr"
                                         , "Mai" , "Iun" , "Iul" , "Aug" , "Sep" , "Oct" , "Nov" , "Dec" ]; %>
+                                        <!--toISOString intoarce un string standardizat cu data si ora-->
                                         <time class="data-tag" datetime="<%- d.toISOString() %>"><i
                                                 class="fa-regular fa-calendar"></i> <%- d.getDate() %> <%-
                                                     luni[d.getMonth()] %> <%- d.getFullYear() %></time>

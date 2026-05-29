@@ -1,21 +1,24 @@
 window.addEventListener("load", function () {
-    // 10. Validare la schimbare range
+    // Etapa6: Validare la schimbare range (afisarea valorii selectate - req. 63)
+    //la fiecare schimbare ruleaza functia, care, apoi inlocuieste val-pret cu noua valoare de la slider
     document.getElementById("inp-pret").onchange = function () {
         document.getElementById("val-pret-maxim").innerHTML = this.value;
     }
 
-    // Validare live pentru Textarea (Floating label cu validare)
+    // Etapa6: Validare live pentru Textarea (Floating label cu validare tip is-invalid, si corectare automata - req. 90, 94)
     const descriereTextarea = document.getElementById("inp-descriere");
-
+    //input ruleaza functia la fiecare litera scrisa
     descriereTextarea.addEventListener("input", function () {
         let valoare = this.value.toLowerCase().trim();
         let valRaw = this.value;
         // Permite litere, cifre, spatii, cratime, virgule, puncte si diacritice romanesti
         let regex = /^[a-zA-Z0-9 \-ăâîșțĂÂÎȘȚ,.]*$/;
-        
+        //+ e cuantificator de 1 sau mai multe ori, trebuie sa introduca minim un caracter
+
         // Validare esuată: conține cuvântul "test", are doar 1-2 litere (dacă s-a început scrierea) sau conține caractere nepermise
         let esteInvalid = valoare.includes("test") || (valoare.length > 0 && valoare.length < 3) || !regex.test(valRaw);
 
+        //classlist ca sa mearga .add si .remove
         if (esteInvalid) {
             this.classList.add("is-invalid");  // Bootstrap Floating label trece în stil 'invalid' roșu
         } else {
@@ -31,12 +34,12 @@ window.addEventListener("load", function () {
     // Suport pentru tasta Enter in search bar
     document.getElementById("inp-nume").addEventListener("keypress", function (e) {
         if (e.key === "Enter") {
-            e.preventDefault();
+            e.preventDefault();//anulez refreshul automat
             document.getElementById("btn-filtrare").click();
         }
     });
 
-    // Buton filtrare
+    // Etapa6: Buton filtrare care aplica filtrarea dupa toate inputurile activate (req. 85)
     document.getElementById("btn-filtrare").onclick = function () {
         let rawNume = document.getElementById("inp-nume").value;
         let valNume = rawNume.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -63,8 +66,9 @@ window.addEventListener("load", function () {
             }
         }
 
-        // 10. Validare
+        // Etapa6: Validare (la click pe filtru/sortare/calcul) verificam intai ca inputurile sunt valide si oprim executia cu alert - req. 90
         if (rawNume && !/^[a-zA-Z0-9 \-ăâîșțĂÂÎȘȚ]+$/.test(rawNume)) {
+
             alert("Numele produsului contine caractere invalide!");
             return;
         }
@@ -80,7 +84,7 @@ window.addEventListener("load", function () {
 
             let nume = art.querySelector("h3 a").innerHTML.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             let pret = parseFloat(art.querySelector(".val-pret").innerHTML);
-            let culoare = art.querySelector(".val-culoare").innerHTML.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            let culoare = art.querySelector(".val-culoare").innerHTML.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");//de la unicode 300 la unincode 036f (virgulite caciulite)
             let aprobat = art.querySelector(".val-aprobat").innerHTML.toLowerCase() === "da" ? "da" : "nu";
             let materiale = art.querySelector(".val-materiale").innerHTML.toLowerCase();
             let descriere = art.querySelector(".val-descriere").innerHTML.toLowerCase();
@@ -100,7 +104,7 @@ window.addEventListener("load", function () {
                 for (let mat of materialeSelectate) {
                     if (materiale.includes(mat)) {
                         condMateriale = true;
-                        break;
+                        break; //am gasit unul bun si produsul metrita afisat
                     }
                 }
             }
@@ -121,7 +125,7 @@ window.addEventListener("load", function () {
         }
     }
 
-    // Functie de sortare (comuna)
+    // Etapa6: Doua butoane de sortare dupa doua chei (raport caracteristica numerica secundara/pret si a 2a cheie categorie secundara/sport) - req. 86
     function sorteaza(semn) {
         let articole = document.getElementsByClassName("produs");
         let v_articole = Array.from(articole);
@@ -141,7 +145,7 @@ window.addEventListener("load", function () {
 
             let sport_a = a.querySelector(".val-sport").innerHTML;
             let sport_b = b.querySelector(".val-sport").innerHTML;
-            return semn * sport_a.localeCompare(sport_b);
+            return semn * sport_a.localeCompare(sport_b);//locale compare returneaza 1 daca sport_a>=sport_b si -1 altfel 
         });
 
         for (let art of v_articole) {
@@ -150,14 +154,14 @@ window.addEventListener("load", function () {
     }
 
     document.getElementById("btn-sort-asc").onclick = function () {
-        sorteaza(1);
+        sorteaza(1); //sortare crescatoare
     }
 
     document.getElementById("btn-sort-desc").onclick = function () {
-        sorteaza(-1);
+        sorteaza(-1); //sortare descrescatoare
     }
 
-    // Buton Calculare
+    // Etapa6: Buton calculare suma afisat intr-un div cu pozitie fixa generat dinamic, dispare dupa 2 sec - req. 87
     document.getElementById("btn-calcul").onclick = function () {
         let articole = document.getElementsByClassName("produs");
         let suma = 0;
@@ -181,16 +185,16 @@ window.addEventListener("load", function () {
         divCalcul.style.zIndex = "1000";
         divCalcul.style.borderRadius = "10px";
 
-        document.body.appendChild(divCalcul);
+        document.body.appendChild(divCalcul); //il punem in document body pt a fi afisat peste restul elementelor
 
         setTimeout(function () {
             if (document.getElementById("div-calcul-dinamic")) {
                 document.getElementById("div-calcul-dinamic").remove();
             }
-        }, 2000);
+        }, 2000); //2sec
     }
 
-    // Resetare filtre
+    // Etapa6: Resetare filtre - mesaj confirmare, intoarcere la default, reseteaza sortarea la cea initiala - req. 88, 89
     document.getElementById("btn-reset").onclick = function () {
         if (confirm("Esti sigur ca vrei sa resetezi filtrele?")) {
             document.getElementById("inp-nume").value = "";
