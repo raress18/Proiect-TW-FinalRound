@@ -4,58 +4,60 @@
 <head>
     <title>Seturi - FinalRound</title>
     <%- include("../fragmente/head.ejs") %>
-    <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
+        <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
+        <link rel="stylesheet" href="/resurse/css/seturi.css" type="text/css" />
 </head>
 
 <body class="body-produse">
     <%- include("../fragmente/header.ejs") %>
 
-    <main class="container-pagina-produse"
-        style="display: block !important; max-width: 1300px; margin: 0 auto; padding: 40px 20px;">
-        <div class="wrapper-interior-produse" style="display: block; width: 100%;">
+        <main class="container-pagina-produse">
+            <div class="wrapper-interior-produse">
 
-            <div class="titlu-sectiune-produse">
-                <h2>Seturi Echipament (Bonus 17)</h2>
-            </div>
+                <div class="titlu-sectiune-produse">
+                    <h2>Seturi Echipamente </h2>
+                    <!--o sa apara cu majuscule ca am un text-transform:uppercase -->
+                </div>
 
-            <section class="lista-seturi" style="display: flex; flex-direction: column; gap: 20px;">
-                <% if (locals.seturi && seturi.length > 0) { %>
-                    <% for (let set of seturi) { %>
-                        <article class="set-produs" style="border: 2px solid #1f2937; border-radius: 10px; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); background-color: #ffffff;">
-                            <h3 style="margin-top: 0; color: #111827; font-size: 1.8em; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px;"><%- set.nume_set %></h3>
-                            <p style="color: #4b5563; font-size: 1.1em; margin-bottom: 20px;"><i>"<%- set.descriere_set %>"</i></p>
-                            
-                            <div style="background-color: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: inline-block;">
-                                <strong style="font-size: 1.2em; color: #374151;">Preț Set (Redus): </strong> 
-                                <span style="color: #dc2626; font-size: 1.5em; font-weight: bold;"><%- set.pret_redus %> RON</span>
-                            </div>
+                <section class="lista-seturi">
+                    <% if (locals.seturi && seturi.length> 0) { %>
+                        <% for (let set of seturi) { %>
+                            <article class="set-produs">
+                                <h3 class="set-titlu"><%- set.nume_set %></h3>
+                                <p class="set-descriere">"<%- set.descriere_set %>"</p>
 
-                            <h4 style="margin-bottom: 15px; color: #1f2937;">Echipamente Incluse:</h4>
-                            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                                <% for (let p of set.produse) { %>
-                                    <div style="text-align: center; border: 1px solid #e5e7eb; padding: 15px; border-radius: 8px; background: #fff; width: 280px; transition: transform 0.2s, box-shadow 0.2s; position: relative; z-index: 1;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 15px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
-                                        <a href="/produs/<%- p.id %>" style="text-decoration: none; color: #1f2937; display: block; height: 100%;">
-                                            <img src="/resurse/imagini/<%- p.imagine %>" alt="<%- p.nume %>" onerror="this.src='/resurse/imagini/echipament_mic.jpg'" style="width: 100%; height: 250px; object-fit: contain; border-radius: 5px; margin-bottom: 15px; display: block; position: static; transform: none; box-shadow: none;">
-                                            <span style="display: block; font-size: 1.1em; font-weight: 600; line-height: 1.3;"><%- p.nume %></span>
-                                            <span style="display: block; font-size: 1em; color: #6b7280; margin-top: 8px;"><%- p.pret %> RON</span>
-                                        </a>
+                                <div class="set-pret-container">
+                                    <strong>Preț Set (Redus): </strong>
+                                    <span class="pret-valoare"><%- set.pret_redus %> RON</span>
+                                </div>
+
+                                <h4>Echipamente Incluse:</h4>
+                                <div class="echipamente-incluse">
+                                    <% for (let p of set.produse) { %>
+                                        <div class="produs-card-mic">
+                                            <a href="/produs/<%- p.id %>">
+                                                <img src="/resurse/imagini/<%- p.imagine %>" alt="<%- p.nume %>"
+                                                    onerror="this.src='/resurse/imagini/echipament_mic.jpg'">
+                                                <span class="produs-nume"><%- p.nume %></span>
+                                                <span class="produs-pret"><%- p.pret %> RON</span>
+                                            </a>
+                                        </div>
+                                        <% } %>
+                                </div>
+                            </article>
+                            <% } %>
+                                <% } else { %>
+                                    <div class="fara-seturi">
+                                        <i class="fa-solid fa-box-open"></i>
+                                        <p>Nu s-au găsit seturi în baza de date.</p>
                                     </div>
-                                <% } %>
-                            </div>
-                        </article>
-                    <% } %>
-                <% } else { %>
-                    <div style="text-align: center; padding: 50px; background: #f9fafb; border-radius: 10px;">
-                        <i class="fa-solid fa-box-open" style="font-size: 3em; color: #9ca3af; margin-bottom: 15px;"></i>
-                        <p style="font-size: 1.2em; color: #4b5563;">Nu s-au găsit seturi în baza de date.</p>
-                    </div>
-                <% } %>
-            </section>
+                                    <% } %>
+                </section>
 
-        </div>
-    </main>
+            </div>
+        </main>
 
-    <%- include("../fragmente/footer.ejs") %>
+        <%- include("../fragmente/footer.ejs") %>
 </body>
 
 </html>

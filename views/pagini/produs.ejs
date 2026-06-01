@@ -5,6 +5,8 @@
     <!-- Cerinta.txt: Pagina produs unic care afiseaza TOATE detaliile (req. 5) -->
     <title><%- produs.nume %> - FinalRound</title>
     <%- include("../fragmente/head.ejs") %>
+        <link rel="stylesheet" href="/resurse/css/seturi.css" type="text/css" />
+
         <link
             href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
             rel="stylesheet">
@@ -255,9 +257,9 @@
     <%- include("../fragmente/header.ejs") %>
 
         <main style="display: block !important;">
+
             <div class="container-produs-unic">
 
-                <!-- COLOANA STANGA: IMAGINE MASIVA -->
                 <div class="coloana-imagini">
                     <div class="imagine-principala">
                         <img src="/resurse/imagini/<%- produs.imagine %>" alt="<%- produs.nume %>"
@@ -265,14 +267,12 @@
                     </div>
                 </div>
 
-                <!-- COLOANA DREAPTA: DETALII MINIMALISTE -->
                 <div class="coloana-detalii">
                     <h2 class="titlu-produs"><%- produs.nume %></h2>
                     <h3 class="subtitlu-produs"><%- produs.categorie %> - <%- produs.tip_sport %></h3>
 
                     <div class="pret-produs"><%- produs.pret %> RON</div>
 
-                    <!-- TABEL CARACTERISTICI (Obligatoriu prin cerinta) -->
                     <table class="tabel-detalii">
                         <tr>
                             <th>Greutate</th>
@@ -281,7 +281,6 @@
                         <tr>
                             <th>Culoare</th>
                             <td>
-                                <!-- Un mic artificiu vizual pentru culoare -->
                                 <% let hexC='#000' ; if (produs.culoare==='Alb' ) hexC='#fff' ; else if
                                     (produs.culoare==='Rosu' ) hexC='#e63946' ; else if (produs.culoare==='Albastru' )
                                     hexC='#1d4ed8' ; else if (produs.culoare !=='Negru' ) hexC='#eab308' ; let
@@ -297,9 +296,7 @@
                         </tr>
                         <tr>
                             <th>Aprobat competiție</th>
-                            <td>
-                                <%- produs.aprobat_competitie ? 'Da' : 'Nu' %>
-                            </td>
+                            <td><%- produs.aprobat_competitie ? 'Da' : 'Nu' %></td>
                         </tr>
                         <tr>
                             <th>Data Adăugării</th>
@@ -311,7 +308,6 @@
                         </tr>
                     </table>
 
-                    <!-- BUTOANE -->
                     <div class="zona-butoane">
                         <button class="btn-adauga">Add to cart <i class="fa-solid fa-plus"></i></button>
                         <button class="btn-fav"><i class="fa-regular fa-heart"></i></button>
@@ -322,33 +318,44 @@
                         <p><%- produs.descriere %></p>
                     </div>
 
-                    <!-- Bonus 17: Seturi din care face parte produsul -->
-                    <% if (locals.seturi && seturi.length > 0) { %>
-                    <div class="seturi-produs" style="margin-top: 3rem; border-top: 1px solid #eee; padding-top: 1.5rem;">
-                        <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.2rem; text-transform: uppercase; margin-top: 0; margin-bottom: 1rem;">Seturi care includ acest produs</h3>
-                        
+                </div>
+            </div>
+            <% if (locals.seturi && seturi.length> 0) { %>
+                <div style="max-width: 1400px; margin: 3rem auto 0 auto; border-top: 1px solid #e5e7eb; padding: 2rem;">
+                    <h2 style="font-size: 1.5em; color: #111827; margin-bottom: 20px;">
+                        Acest produs este inclus în următoarele seturi:
+                    </h2>
+
+                    <section class="lista-seturi">
                         <% for (let set of seturi) { %>
-                            <div class="set-item" style="background: #f9f9f9; border-radius: 8px; padding: 15px; margin-bottom: 20px; border: 1px solid #e5e5e5;">
-                                <h4 style="margin: 0 0 10px 0; color: #111; font-size: 1.1em;"><%- set.nume_set %></h4>
-                                <div style="color: #d90429; font-weight: bold; margin-bottom: 15px;">Preț Set: <%- set.pret_redus %> RON</div>
-                                
-                                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <article class="set-produs">
+                                <h3 class="set-titlu"><%- set.nume_set %></h3>
+                                <p class="set-descriere">"<%- set.descriere_set %>"</p>
+
+                                <div class="set-pret-container">
+                                    <strong>Preț Set (Redus): </strong>
+                                    <span class="pret-valoare"><%- set.pret_redus %> RON</span>
+                                </div>
+
+                                <h4>Echipamente Incluse:</h4>
+                                <div class="echipamente-incluse">
                                     <% for (let p of set.produse) { %>
-                                        <div style="width: 80px; text-align: center;">
-                                            <a href="/produs/<%- p.id %>" style="text-decoration: none; color: #333;">
-                                                <img src="/resurse/imagini/<%- p.imagine %>" alt="<%- p.nume %>" onerror="this.src='/resurse/imagini/echipament_mic.jpg'" style="width: 100%; height: 80px; object-fit: contain; background: #fff; border: 1px solid #eee; border-radius: 4px;">
-                                                <span style="font-size: 0.75rem; display: block; line-height: 1.1; margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="<%- p.nume %>"><%- p.nume %></span>
+                                        <div class="produs-card-mic">
+                                            <a href="/produs/<%- p.id %>">
+                                                <img src="/resurse/imagini/<%- p.imagine %>" alt="<%- p.nume %>"
+                                                    onerror="this.src='/resurse/imagini/echipament_mic.jpg'">
+                                                <span class="produs-nume"><%- p.nume %></span>
+                                                <span class="produs-pret"><%- p.pret %> RON</span>
                                             </a>
                                         </div>
-                                    <% } %>
+                                        <% } %>
                                 </div>
-                            </div>
-                        <% } %>
-                    </div>
-                    <% } %>
+                            </article>
+                            <% } %>
+                    </section>
                 </div>
+                <% } %>
 
-            </div>
         </main>
 
         <%- include("../fragmente/footer.ejs") %>

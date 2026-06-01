@@ -360,7 +360,7 @@ app.get("/produse", async function (req, res) {
 
     try {
         const rez = await db.query(query, valori);
-        
+
         // Bonus: Get dynamic filter attributes
         const infoFiltreRez = await db.query(`
             SELECT 
@@ -371,9 +371,9 @@ app.get("/produse", async function (req, res) {
                 ARRAY_AGG(DISTINCT tip_sport) as sporturi,
                 ARRAY_AGG(DISTINCT aprobat_competitie) as aprobari
             FROM produse
-        `);
+        `);//array_agg aduna valorile intr-un array
         const infoFiltre = infoFiltreRez.rows[0];
-        
+
         const filtre = {
             pretMin: infoFiltre.pret_min,
             pretMax: infoFiltre.pret_max,
@@ -412,11 +412,12 @@ app.get("/seturi", async function (req, res) {
             GROUP BY s.id, s.nume_set, s.descriere_set
         `;
         const rez = await db.query(querySeturi);
-        
+
         const seturi = rez.rows.map(set => {
             // reducerea este de min(5, n) * 5%
-            const reducere = Math.min(5, parseInt(set.nr_produse)) * 0.05;
-            set.pret_redus = (set.pret_total * (1 - reducere)).toFixed(2);
+            //map ia ficare element si il baga in functie (adaugam pretul redus)
+            const reducere = Math.min(5, parseInt(set.nr_produse)) * 0.05;//aici parse int ca + e supracincarcat si cu concatenare de stringuri
+            set.pret_redus = (set.pret_total * (1 - reducere)).toFixed(2);//rotunjeste la 2 zecimale
             return set;
         });
 
@@ -435,7 +436,7 @@ app.get("/produs/:id", async function (req, res) {
             afisareEroare(res, 404, "Produs inexistent", "Produsul nu a fost gasit in baza de date.");
             return;
         }
-        
+
         // Bonus 17: Get sets for this product
         const querySeturi = `
             SELECT s.id, s.nume_set, s.descriere_set,
@@ -454,7 +455,7 @@ app.get("/produs/:id", async function (req, res) {
             GROUP BY s.id, s.nume_set, s.descriere_set
         `;
         const seturiRez = await db.query(querySeturi, [req.params.id]);
-        
+
         const seturi = seturiRez.rows.map(set => {
             const reducere = Math.min(5, parseInt(set.nr_produse)) * 0.05;
             set.pret_redus = (set.pret_total * (1 - reducere)).toFixed(2);
